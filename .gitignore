@@ -1,0 +1,5 @@
+/build/
+/test/work/
+/test/nv_matrix.py
+*.pyc
+*.bak
