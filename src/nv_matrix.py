@@ -68,7 +68,7 @@ PLUGIN = f'{APPLICATION} plugin v@release'
 class Plugin:
     """noveltree relationship matrix plugin class."""
     VERSION = '@release'
-    NOVELYST_API = '1.0'
+    NOVELTREE_API = '1.0'
     DESCRIPTION = 'A section relationship table'
     URL = 'https://peter88213.github.io/noveltree_matrix'
     _HELP_URL = 'https://peter88213.github.io/noveltree_matrix/usage'

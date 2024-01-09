@@ -22,7 +22,7 @@ TARGET_FILE = f'{BUILD}nv_matrix.py'
 
 
 def main():
-    inliner.run(SOURCE_FILE, TARGET_FILE, 'nvmatrixlib', '../../novelyst_matrix/src/')
+    inliner.run(SOURCE_FILE, TARGET_FILE, 'nvmatrixlib', '../../noveltree_matrix/src/')
     inliner.run(TARGET_FILE, TARGET_FILE, 'novxlib', '../../novxlib/src/', copynovxlib=False)
     print('Done.')
 
