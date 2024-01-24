@@ -68,7 +68,7 @@ class TableManager(tk.Toplevel):
         """enable element change."""
         Node.isLocked = False
 
-    def update(self):
+    def refresh(self):
         """Refresh the view after changes have been made "outsides"."""
         if self.isOpen:
             if not self._skipUpdate:
