@@ -2,7 +2,7 @@
 
 A noveltree plugin providing a section relationship matrix. 
 
-For more information, see the [project homepage](https://peter88peter88213.github.io/noveltree_ with description and download instructions.
+For more information, see the [project homepage](https://peter88213.github.io/noveltree) with description and download instructions.
 
 ## Feedback? Ideas? Feature requests?
 
