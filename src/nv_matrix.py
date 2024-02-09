@@ -71,7 +71,7 @@ class Plugin:
     NOVELTREE_API = '1.0'
     DESCRIPTION = 'A section relationship table'
     URL = 'https://peter88213.github.io/noveltree_matrix'
-    _HELP_URL = 'https://peter88213.github.io/noveltree_matrix/usage'
+    _HELP_URL = 'https://peter88213.github.io/noveltree-help/noveltree_matrix/'
 
     def install(self, model, view, controller, prefs):
         """Add a submenu to the 'Tools' menu.

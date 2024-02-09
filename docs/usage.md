@@ -16,30 +16,7 @@ The plugin adds a **Matrix** entry to the *noveltree* main menu, and a **Matrix 
 
 # Operation
 
----
-
-## Launch the program
-
-- Open the matrix manager from the main menu: **Matrix**.
-
----
-
-## Add/remove relationships
-
-- Add/Remove relationships by klicking on the nodes with the `Ctrl` key pressed.
-
----
-
-## Mouse wheel scrolling
-
-- Use the mouse wheel for vertical scrolling.
-- Use the mouse wheel with the `Shift` key pressed for horizontal scrolling.    
-
----
-
-## Exit 
-
-- When closing the window, you are asked whether changes shall be applied to the project.
+See the [online help](https://peter88213.github.io/noveltree-help/noveltree_matrix/).
 
 ---
 
