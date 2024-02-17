@@ -7,7 +7,7 @@ The novxlib project (see https://github.com/peter88213/novxlib)
 must be located on the same directory level as the nv_matrix project. 
 
 Copyright (c) 2024 Peter Triesberger
-For further information see https://github.com/peter88213/noveltree_matrix
+For further information see https://github.com/peter88213/nv_matrix
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 import os
@@ -22,7 +22,7 @@ TARGET_FILE = f'{BUILD}nv_matrix.py'
 
 
 def main():
-    inliner.run(SOURCE_FILE, TARGET_FILE, 'nvmatrixlib', '../../noveltree_matrix/src/')
+    inliner.run(SOURCE_FILE, TARGET_FILE, 'nvmatrixlib', '../../nv_matrix/src/')
     inliner.run(TARGET_FILE, TARGET_FILE, 'novxlib', '../../novxlib/src/', copynovxlib=False)
     print('Done.')
 
