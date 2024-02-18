@@ -1,14 +1,14 @@
-[Project homepage](https://peter88213.github.io/nv_matrix) > Instructions for use
+[Project homepage](https://github.com/peter88213/nv_matrix) > Instructions for use
 
 --- 
 
-A [noveltree](https://peter88213.github.io/noveltree/) plugin providing a section relationship matrix.
+A [noveltree](https://github.com/peter88213/noveltree/) plugin providing a section relationship matrix.
 
 ---
 
 # Installation
 
-If [noveltree](https://peter88213.github.io/noveltree/) is installed, the setup script auto-installs the *nv_matrix* plugin in the *noveltree* plugin directory.
+If [noveltree](https://github.com/peter88213/noveltree/) is installed, the setup script auto-installs the *nv_matrix* plugin in the *noveltree* plugin directory.
 
 The plugin adds a **Matrix** entry to the *noveltree* main menu, and a **Matrix plugin Online help** entry to the **Help** menu. 
 
@@ -16,7 +16,7 @@ The plugin adds a **Matrix** entry to the *noveltree* main menu, and a **Matrix 
 
 # Operation
 
-See the [online help](https://peter88213.github.io/noveltree-help/nv_matrix/).
+See the [online help](https://peter88213.github.io/nvhelp-en/nv_matrix/).
 
 ---
 

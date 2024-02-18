@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.0.3\n"
-"POT-Creation-Date: 2024-02-17 10:07:08\n"
-"PO-Revision-Date: 2024-02-17 10:07:08\n"
+"Project-Id-Version: 1.1.0\n"
+"POT-Creation-Date: 2024-02-18 16:32:52\n"
+"PO-Revision-Date: 2024-02-18 16:32:52\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -54,4 +54,7 @@ msgstr "Dienstag"
 
 msgid "Wednesday"
 msgstr "Mittwoch"
+
+msgid "nvhelp-en"
+msgstr "nvhelp-en"
 

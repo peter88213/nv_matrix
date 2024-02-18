@@ -1,12 +1,35 @@
 # nv_matrix
 
-A noveltree plugin providing a section relationship matrix. 
+The [noveltree](https://github.com/peter88213/noveltree/) Python program helps authors organize novels.  
 
-For more information, see the [project homepage](https://peter88213.github.io/noveltree) with description and download instructions.
+*nv_matrix* is a plugin providing a section relationship matrix. 
 
-## Feedback? Ideas? Feature requests?
+![Screenshot](docs/Screenshots/screen01.png)
 
-You can go to the [noveltree "discussions" forum](https://github.com/peter88213/noveltree/discussions) and start a thread.
+## Features
+
+- The plugin adds a **Matrix** entry to the *noveltree* main menu.
+- Display section relationships to characters, locations, items, and arcs with a spreadsheet-like matrix.
+- Add/Remove relationships by klicking on the nodes.
+
+## Requirements
+
+- [noveltree](https://github.com/peter88213/noveltree/) version 1.8+
+
+## Download and install
+
+[Download the latest release (version 1.1.0)](https://github.com/peter88213/nv_matrix/raw/main/dist/nv_matrix_v1.1.0.zip)
+
+- Extract the "nv_matrix_v1.1.0" folder from the downloaded zipfile "nv_matrix_v1.1.0.zip".
+- Move into this new folder and launch **setup.pyw**. This installs the plugin for the local user.
+
+---
+
+[Changelog](docs/changelog.md)
+
+## Usage
+
+See the [instructions for use](docs/usage.md)
 
 ## Credits
 
@@ -17,5 +40,3 @@ You can go to the [noveltree "discussions" forum](https://github.com/peter88213/
 This is Open Source software, and the *nv_matrix* plugin is licensed under GPLv3. See the
 [GNU General Public License website](https://www.gnu.org/licenses/gpl-3.0.en.html) for more
 details, or consult the [LICENSE](https://github.com/peter88213/nv_matrix/blob/main/LICENSE) file.
-
-The modules in the *widgets* package are published under the [MIT License](http://www.opensource.org/licenses/mit-license.php). 

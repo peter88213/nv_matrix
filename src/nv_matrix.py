@@ -68,10 +68,10 @@ PLUGIN = f'{APPLICATION} plugin v@release'
 class Plugin:
     """noveltree relationship matrix plugin class."""
     VERSION = '@release'
-    NOVELTREE_API = '1.0'
+    NOVELTREE_API = '1.8'
     DESCRIPTION = 'A section relationship table'
-    URL = 'https://peter88213.github.io/nv_matrix'
-    _HELP_URL = 'https://peter88213.github.io/noveltree-help/nv_matrix/'
+    URL = 'https://github.com/peter88213/nv_matrix'
+    _HELP_URL = f'https://peter88213.github.io/{_("nvhelp-en")}/nv_matrix/'
 
     def install(self, model, view, controller, prefs):
         """Add a submenu to the 'Tools' menu.
