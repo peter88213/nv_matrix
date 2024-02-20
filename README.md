@@ -1,12 +1,12 @@
 [![Download the latest release](docs/img/download-button.png)](https://github.com/peter88213/nv_matrix/raw/main/dist/nv_matrix_v2.0.0.zip)
 [![Changelog](docs/img/changelog-button.png)](docs/changelog.md)
-[![News](docs/img/news-button.png)](https://github.com/peter88213/noveltree/discussions/1)
+[![News](docs/img/news-button.png)](https://github.com/peter88213/novelibre/discussions/1)
 [![Online help](docs/img/help-button.png)](https://peter88213.github.io/nvhelp-en/nv_matrix/)
 
 
 # ![M](icons/mLogo32.png] nv_matrix
 
-The [noveltree](https://github.com/peter88213/noveltree/) Python program helps authors organize novels.  
+The [novelibre](https://github.com/peter88213/novelibre/) Python program helps authors organize novels.  
 
 *nv_matrix* is a plugin providing a section relationship matrix. 
 
@@ -14,13 +14,13 @@ The [noveltree](https://github.com/peter88213/noveltree/) Python program helps a
 
 ## Features
 
-- The plugin adds a **Matrix** entry to the *noveltree* main menu.
+- The plugin adds a **Matrix** entry to the *novelibre* main menu.
 - Display section relationships to characters, locations, items, and arcs with a spreadsheet-like matrix.
 - Add/Remove relationships by klicking on the nodes.
 
 ## Requirements
 
-- [noveltree](https://github.com/peter88213/noveltree/) version 2.0+
+- [novelibre](https://github.com/peter88213/novelibre/) version 2.0+
 
 ## Download and install
 

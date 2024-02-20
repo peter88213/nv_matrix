@@ -2,15 +2,15 @@
 
 --- 
 
-A [noveltree](https://github.com/peter88213/noveltree/) plugin providing a section relationship matrix.
+A [novelibre](https://github.com/peter88213/novelibre/) plugin providing a section relationship matrix.
 
 ---
 
 # Installation
 
-If [noveltree](https://github.com/peter88213/noveltree/) is installed, the setup script auto-installs the *nv_matrix* plugin in the *noveltree* plugin directory.
+If [novelibre](https://github.com/peter88213/novelibre/) is installed, the setup script auto-installs the *nv_matrix* plugin in the *novelibre* plugin directory.
 
-The plugin adds a **Matrix** entry to the *noveltree* main menu, and a **Matrix plugin Online help** entry to the **Help** menu. 
+The plugin adds a **Matrix** entry to the *novelibre* main menu, and a **Matrix plugin Online help** entry to the **Help** menu. 
 
 ---
 

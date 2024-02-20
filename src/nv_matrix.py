@@ -1,4 +1,4 @@
-"""A relationship matrix plugin for noveltree
+"""A relationship matrix plugin for novelibre
 
 Requires Python 3.6+
 Copyright (c) 2024 Peter Triesberger
@@ -66,7 +66,7 @@ PLUGIN = f'{APPLICATION} plugin v@release'
 
 
 class Plugin:
-    """noveltree relationship matrix plugin class."""
+    """novelibre relationship matrix plugin class."""
     VERSION = '@release'
     API_VERSION = '2.0'
     DESCRIPTION = 'A section relationship table'
@@ -131,7 +131,7 @@ class Plugin:
         self.on_quit()
 
     def on_quit(self):
-        """Actions to be performed when noveltree is closed."""
+        """Actions to be performed when novelibre is closed."""
         if self._matrixViewer:
             if self._matrixViewer.isOpen:
                 self._matrixViewer.on_quit()
