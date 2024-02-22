@@ -4,7 +4,7 @@
 [![Online help](docs/img/help-button.png)](https://peter88213.github.io/nvhelp-en/nv_matrix/)
 
 
-# ![M](icons/mLogo32.png] nv_matrix
+# ![M](icons/mLogo32.png) nv_matrix
 
 The [novelibre](https://github.com/peter88213/novelibre/) Python program helps authors organize novels.  
 
