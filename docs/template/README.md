@@ -39,7 +39,7 @@ See the [instructions for use](docs/usage.md)
 
 ## Credits
 
-- The icons are made using the free *Pusab* font by Ryoichi Tsunekawa, [Flat-it](http://flat-it.com/).
+- The logo is made using the free *Pusab* font by Ryoichi Tsunekawa, [Flat-it](http://flat-it.com/).
 
 ## License
 
