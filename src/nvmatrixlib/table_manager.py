@@ -65,7 +65,7 @@ class TableManager(tk.Toplevel):
         self._ui.views.remove(self)
 
     def unlock(self):
-        """enable element change."""
+        """Enable element change."""
         Node.isLocked = False
 
     def refresh(self):

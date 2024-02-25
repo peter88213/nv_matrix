@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v2.2.0
+
+- Implement global locking and unlocking.
+
+Based on novxlib v1.1.0
+
 ### v2.1.0
 
 Update for "novelibre".

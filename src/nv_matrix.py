@@ -126,6 +126,11 @@ class Plugin:
         """Enable menu entries when a project is open."""
         self._ui.mainMenu.entryconfig(APPLICATION, state='normal')
 
+    def lock(self):
+        """Inhibit changes."""
+        self._ui.mainMenu.entryconfig(APPLICATION, state='disabled')
+        self._matrixViewer.lock()
+
     def on_close(self):
         """Apply changes and close the window."""
         self.on_quit()
@@ -143,3 +148,9 @@ class Plugin:
             elif keyword in self.configuration.settings:
                 self.configuration.settings[keyword] = self.kwargs[keyword]
         self.configuration.write(self.iniFile)
+
+    def unlock(self):
+        """Enable changes."""
+        self._ui.mainMenu.entryconfig(APPLICATION, state='normal')
+        self._matrixViewer.unlock()
+
