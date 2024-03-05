@@ -4,17 +4,26 @@
 
 ## Changelog
 
+### v2.2.1
+
+- Rewording: Arc -> Plot line.
+
+Based on novxlib v1.5.0
+Compatibility: noveltree v2.1 API
+
 ### v2.2.0
 
 - Implement global locking and unlocking.
 
 Based on novxlib v1.1.0
+Compatibility: noveltree v2.1 API
 
 ### v2.1.0
 
 Update for "novelibre".
 
 Based on novxlib v1.1.0
+Compatibility: noveltree v2.1 API
 
 ### v2.0.0
 

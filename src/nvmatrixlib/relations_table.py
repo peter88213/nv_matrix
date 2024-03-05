@@ -59,7 +59,7 @@ class RelationsTable:
 
         #--- Display titles of "normal" sections.
         row = 0
-        self._arcNodes = {}
+        self._plotlineNodes = {}
         self._characterNodes = {}
         self._locationNodes = {}
         self._itemNodes = {}
@@ -74,7 +74,7 @@ class RelationsTable:
                     self._characterNodes[scId] = {}
                     self._locationNodes[scId] = {}
                     self._itemNodes[scId] = {}
-                    self._arcNodes[scId] = {}
+                    self._plotlineNodes[scId] = {}
 
                     tk.Label(master.rowTitles,
                              text=self._novel.sections[scId].title,
@@ -92,50 +92,50 @@ class RelationsTable:
                          text=_('Sections'),
                          ).pack(fill='x')
 
-        #--- Arc columns.
+        #--- Plot line columns.
         if self._novel.arcs:
-            arcTitleWindow = tk.Frame(master.columnTitles)
-            arcTitleWindow.pack(side='left', fill='both')
-            tk.Label(arcTitleWindow, text=_('Arcs'), bg=self._kwargs['color_arc_heading']).pack(fill='x')
-            arcTypeColumn = tk.Frame(master.display)
-            arcTypeColumn.pack(side='left', fill='both')
-            arcColumn = tk.Frame(arcTypeColumn)
-            arcColumn.pack(fill='both')
+            plotlineTitleWindow = tk.Frame(master.columnTitles)
+            plotlineTitleWindow.pack(side='left', fill='both')
+            tk.Label(plotlineTitleWindow, text=_('Plot lines'), bg=self._kwargs['color_arc_heading']).pack(fill='x')
+            plotlineTypeColumn = tk.Frame(master.display)
+            plotlineTypeColumn.pack(side='left', fill='both')
+            plotlineColumn = tk.Frame(plotlineTypeColumn)
+            plotlineColumn.pack(fill='both')
             for acId in self._novel.tree.get_children(AC_ROOT):
-                # Display arc titles.
+                # Display plot line titles.
                 row = 1
                 bgr = row % 2
                 bgc = col % 2
-                arcTitle = fill_str(self._novel.arcs[acId].shortName)
-                tk.Label(arcTitleWindow,
-                         text=arcTitle,
+                plotlineTitle = fill_str(self._novel.arcs[acId].shortName)
+                tk.Label(plotlineTitleWindow,
+                         text=plotlineTitle,
                          bg=colorsBackground[bgr][bgc],
                          justify='left',
                          anchor='w'
                          ).pack(side='left', fill='x', expand=True)
                 row += 1
 
-                # Display arc nodes.
-                columns.append(tk.Frame(arcColumn))
+                # Display plot line nodes.
+                columns.append(tk.Frame(plotlineColumn))
                 columns[col].pack(side='left', fill='both', expand=True)
-                for scId in self._arcNodes:
+                for scId in self._plotlineNodes:
                     bgr = row % 2
                     node = Node(columns[col],
                          colorFalse=colorsBackground[bgr][bgc],
                          colorTrue=self._kwargs['color_arc_node']
                          )
                     node.pack(fill='x', expand=True)
-                    self._arcNodes[scId][acId] = node
+                    self._plotlineNodes[scId][acId] = node
                     row += 1
                 bgr = row % 2
                 tk.Label(columns[col],
-                         text=arcTitle,
+                         text=plotlineTitle,
                          bg=colorsBackground[bgr][bgc],
                          justify='left',
                          anchor='w'
                          ).pack(fill='x', expand=True)
                 col += 1
-            tk.Label(arcTypeColumn, text=_('Arcs'), bg=self._kwargs['color_arc_heading']).pack(fill='x')
+            tk.Label(plotlineTypeColumn, text=_('Plot lines'), bg=self._kwargs['color_arc_heading']).pack(fill='x')
 
         #--- Character columns.
         if self._novel.characters:
@@ -274,11 +274,11 @@ class RelationsTable:
 
     def set_nodes(self):
         """Loop through all nodes, setting states."""
-        for scId in self._arcNodes:
+        for scId in self._plotlineNodes:
 
-            # Arcs.
+            # Plot lines.
             for acId in self._novel.arcs:
-                self._arcNodes[scId][acId].state = (acId in self._novel.sections[scId].scArcs)
+                self._plotlineNodes[scId][acId].state = (acId in self._novel.sections[scId].scArcs)
 
             # Characters.
             for crId in self._novel.characters:
@@ -294,25 +294,25 @@ class RelationsTable:
 
     def get_nodes(self):
         """Loop through all nodes, modifying the sections according to the states."""
-        for scId in self._arcNodes:
+        for scId in self._plotlineNodes:
 
-            # Arcs.
+            # Plot lines.
             self._novel.sections[scId].scArcs = []
             for acId in self._novel.arcs:
-                arcSections = self._novel.arcs[acId].sections
-                if self._arcNodes[scId][acId].state:
+                plotlineSections = self._novel.arcs[acId].sections
+                if self._plotlineNodes[scId][acId].state:
                     self._novel.sections[scId].scArcs.append(acId)
-                    if not scId in arcSections:
-                        arcSections.append(scId)
+                    if not scId in plotlineSections:
+                        plotlineSections.append(scId)
                 else:
-                    if scId in arcSections:
-                        arcSections.remove(scId)
+                    if scId in plotlineSections:
+                        plotlineSections.remove(scId)
                     for tpId in list(self._novel.sections[scId].scTurningPoints):
                         if self._novel.sections[scId].scTurningPoints[tpId] == acId:
                             del self._novel.sections[scId].scTurningPoints[tpId]
                             self._novel.turningPoints[tpId].sectionAssoc = None
                             # don't trigger the update here
-                self._novel.arcs[acId].sections = arcSections
+                self._novel.arcs[acId].sections = plotlineSections
 
             # Characters.
             scCharacters = self._novel.sections[scId].characters

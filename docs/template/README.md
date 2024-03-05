@@ -15,7 +15,7 @@ The [novelibre](https://github.com/peter88213/novelibre/) Python program helps a
 ## Features
 
 - The plugin adds a **Matrix** entry to the *novelibre* main menu.
-- Display section relationships to characters, locations, items, and arcs with a spreadsheet-like matrix.
+- Display section relationships to plot lines, characters, locations, items with a spreadsheet-like matrix.
 - Add/Remove relationships by klicking on the nodes.
 
 ## Requirements
