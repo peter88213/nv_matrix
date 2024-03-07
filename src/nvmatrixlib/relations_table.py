@@ -4,7 +4,7 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/nv_matrix
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
-from novxlib.novx_globals import AC_ROOT
+from novxlib.novx_globals import PL_ROOT
 from novxlib.novx_globals import CH_ROOT
 from novxlib.novx_globals import CR_ROOT
 from novxlib.novx_globals import IT_ROOT
@@ -93,7 +93,7 @@ class RelationsTable:
                          ).pack(fill='x')
 
         #--- Plot line columns.
-        if self._novel.arcs:
+        if self._novel.plotLines:
             plotlineTitleWindow = tk.Frame(master.columnTitles)
             plotlineTitleWindow.pack(side='left', fill='both')
             tk.Label(plotlineTitleWindow, text=_('Plot lines'), bg=self._kwargs['color_arc_heading']).pack(fill='x')
@@ -101,12 +101,12 @@ class RelationsTable:
             plotlineTypeColumn.pack(side='left', fill='both')
             plotlineColumn = tk.Frame(plotlineTypeColumn)
             plotlineColumn.pack(fill='both')
-            for acId in self._novel.tree.get_children(AC_ROOT):
+            for plId in self._novel.tree.get_children(PL_ROOT):
                 # Display plot line titles.
                 row = 1
                 bgr = row % 2
                 bgc = col % 2
-                plotlineTitle = fill_str(self._novel.arcs[acId].shortName)
+                plotlineTitle = fill_str(self._novel.plotLines[plId].shortName)
                 tk.Label(plotlineTitleWindow,
                          text=plotlineTitle,
                          bg=colorsBackground[bgr][bgc],
@@ -125,7 +125,7 @@ class RelationsTable:
                          colorTrue=self._kwargs['color_arc_node']
                          )
                     node.pack(fill='x', expand=True)
-                    self._plotlineNodes[scId][acId] = node
+                    self._plotlineNodes[scId][plId] = node
                     row += 1
                 bgr = row % 2
                 tk.Label(columns[col],
@@ -277,8 +277,8 @@ class RelationsTable:
         for scId in self._plotlineNodes:
 
             # Plot lines.
-            for acId in self._novel.arcs:
-                self._plotlineNodes[scId][acId].state = (acId in self._novel.sections[scId].scArcs)
+            for plId in self._novel.plotLines:
+                self._plotlineNodes[scId][plId].state = (plId in self._novel.sections[scId].scPlotLines)
 
             # Characters.
             for crId in self._novel.characters:
@@ -297,22 +297,22 @@ class RelationsTable:
         for scId in self._plotlineNodes:
 
             # Plot lines.
-            self._novel.sections[scId].scArcs = []
-            for acId in self._novel.arcs:
-                plotlineSections = self._novel.arcs[acId].sections
-                if self._plotlineNodes[scId][acId].state:
-                    self._novel.sections[scId].scArcs.append(acId)
+            self._novel.sections[scId].scPlotLines = []
+            for plId in self._novel.plotLines:
+                plotlineSections = self._novel.plotLines[plId].sections
+                if self._plotlineNodes[scId][plId].state:
+                    self._novel.sections[scId].scPlotLines.append(plId)
                     if not scId in plotlineSections:
                         plotlineSections.append(scId)
                 else:
                     if scId in plotlineSections:
                         plotlineSections.remove(scId)
-                    for tpId in list(self._novel.sections[scId].scTurningPoints):
-                        if self._novel.sections[scId].scTurningPoints[tpId] == acId:
-                            del self._novel.sections[scId].scTurningPoints[tpId]
-                            self._novel.turningPoints[tpId].sectionAssoc = None
+                    for ppId in list(self._novel.sections[scId].scPlotPoints):
+                        if self._novel.sections[scId].scPlotPoints[ppId] == plId:
+                            del self._novel.sections[scId].scPlotPoints[ppId]
+                            self._novel.plotPoints[ppId].sectionAssoc = None
                             # don't trigger the update here
-                self._novel.arcs[acId].sections = plotlineSections
+                self._novel.plotLines[plId].sections = plotlineSections
 
             # Characters.
             scCharacters = self._novel.sections[scId].characters
