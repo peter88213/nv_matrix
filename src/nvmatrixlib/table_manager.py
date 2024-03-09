@@ -4,6 +4,10 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/nv_matrix
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
+import sys
+from tkinter import ttk
+
+from novxlib.novx_globals import _
 from nvmatrixlib.node import Node
 from nvmatrixlib.relations_table import RelationsTable
 from nvmatrixlib.widgets.table_frame import TableFrame
@@ -27,7 +31,8 @@ class TableManager(tk.Toplevel):
         self.lift()
         self.focus()
         self.protocol("WM_DELETE_WINDOW", self.on_quit)
-        self.bind(self._KEY_QUIT_PROGRAM[0], self.on_quit)
+        if sys.platform != 'win32':
+            self.bind(self._KEY_QUIT_PROGRAM[0], self.on_quit)
 
         #--- Register the view.
         self._ui.views.append(self)
@@ -49,6 +54,9 @@ class TableManager(tk.Toplevel):
         #--- Initialize the view update mechanism.
         self._skipUpdate = False
         self.bind('<Control-Button-1>', self.on_element_change)
+
+        # "Close" button.
+        ttk.Button(self, text=_('Close'), command=self.on_quit).pack(side='right', padx=5, pady=5)
 
     def lock(self):
         """Inhibit element change."""
