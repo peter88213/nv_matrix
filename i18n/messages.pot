@@ -3,8 +3,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 3.0.1\n"
-"POT-Creation-Date: 2024-03-09 20:27:45\n"
+"Project-Id-Version: 4.0.0\n"
+"POT-Creation-Date: 2024-05-17 13:16:32\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -20,9 +20,6 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
-msgid "Friday"
-msgstr ""
-
 msgid "Items"
 msgstr ""
 
@@ -35,28 +32,10 @@ msgstr ""
 msgid "Matrix plugin Online help"
 msgstr ""
 
-msgid "Monday"
-msgstr ""
-
 msgid "Plot lines"
 msgstr ""
 
-msgid "Saturday"
-msgstr ""
-
 msgid "Sections"
-msgstr ""
-
-msgid "Sunday"
-msgstr ""
-
-msgid "Thursday"
-msgstr ""
-
-msgid "Tuesday"
-msgstr ""
-
-msgid "Wednesday"
 msgstr ""
 
 msgid "nvhelp-en"

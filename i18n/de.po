@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 3.0.1\n"
-"POT-Creation-Date: 2024-03-09 20:27:45\n"
-"PO-Revision-Date: 2024-03-09 20:27:45\n"
+"Project-Id-Version: 4.0.0\n"
+"POT-Creation-Date: 2024-05-17 13:16:32\n"
+"PO-Revision-Date: 2024-05-17 13:16:32\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -19,9 +19,6 @@ msgstr "Figuren"
 msgid "Close"
 msgstr "Schließen"
 
-msgid "Friday"
-msgstr "Freitag"
-
 msgid "Items"
 msgstr "Gegenstände"
 
@@ -34,29 +31,11 @@ msgstr "Matrix"
 msgid "Matrix plugin Online help"
 msgstr "Matrix-Plugin Online-Hilfe"
 
-msgid "Monday"
-msgstr "Montag"
-
 msgid "Plot lines"
 msgstr "Plotlinien"
 
-msgid "Saturday"
-msgstr "Samstag"
-
 msgid "Sections"
 msgstr "Abschnitte"
-
-msgid "Sunday"
-msgstr "Sonntag"
-
-msgid "Thursday"
-msgstr "Donnerstag"
-
-msgid "Tuesday"
-msgstr "Dienstag"
-
-msgid "Wednesday"
-msgstr "Mittwoch"
 
 msgid "nvhelp-en"
 msgstr "nvhelp-de"
