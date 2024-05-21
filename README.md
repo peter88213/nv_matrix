@@ -1,4 +1,4 @@
-[![Download the latest release](docs/img/download-button.png)](https://github.com/peter88213/nv_matrix/raw/main/dist/nv_matrix_v4.0.0.zip)
+[![Download the latest release](docs/img/download-button.png)](https://github.com/peter88213/nv_matrix/raw/main/dist/nv_matrix_v4.1.0.zip)
 [![Changelog](docs/img/changelog-button.png)](docs/changelog.md)
 [![News](docs/img/news-button.png)](https://github.com/peter88213/novelibre/discussions/1)
 [![Online help](docs/img/help-button.png)](https://peter88213.github.io/nvhelp-en/nv_matrix/)
@@ -20,13 +20,13 @@ The [novelibre](https://github.com/peter88213/novelibre/) Python program helps a
 
 ## Requirements
 
-- [novelibre](https://github.com/peter88213/novelibre/) version 4.0+
+- [novelibre](https://github.com/peter88213/novelibre/) version 4.1+
 
 ## Download and install
 
-[Download the latest release (version 4.0.0)](https://github.com/peter88213/nv_matrix/raw/main/dist/nv_matrix_v4.0.0.zip)
+[Download the latest release (version 4.1.0)](https://github.com/peter88213/nv_matrix/raw/main/dist/nv_matrix_v4.1.0.zip)
 
-- Extract the "nv_matrix_v4.0.0" folder from the downloaded zipfile "nv_matrix_v4.0.0.zip".
+- Extract the "nv_matrix_v4.1.0" folder from the downloaded zipfile "nv_matrix_v4.1.0.zip".
 - Move into this new folder and launch **setup.pyw**. This installs the plugin for the local user.
 
 ---

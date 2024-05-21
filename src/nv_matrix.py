@@ -22,7 +22,6 @@ from pathlib import Path
 import sys
 import webbrowser
 
-from novxlib.config.configuration import Configuration
 from novxlib.novx_globals import CURRENT_LANGUAGE
 from novxlib.novx_globals import _
 from novxlib.ui.set_icon_tk import set_icon
@@ -42,9 +41,8 @@ SETTINGS = dict(
         color_location_node='coral3',
         color_item_heading='aquamarine1',
         color_item_node='aquamarine3',
-        )
-OPTIONS = dict(
-        )
+)
+OPTIONS = {}
 
 # Initialize localization.
 LOCALE_PATH = f'{os.path.dirname(sys.argv[0])}/locale/'
@@ -68,7 +66,7 @@ PLUGIN = f'{APPLICATION} plugin v@release'
 class Plugin:
     """novelibre relationship matrix plugin class."""
     VERSION = '@release'
-    API_VERSION = '4.0'
+    API_VERSION = '4.1'
     DESCRIPTION = 'A section relationship table'
     URL = 'https://github.com/peter88213/nv_matrix'
     _HELP_URL = f'https://peter88213.github.io/{_("nvhelp-en")}/nv_matrix/'
@@ -93,7 +91,10 @@ class Plugin:
         except:
             configDir = '.'
         self.iniFile = f'{configDir}/matrix.ini'
-        self.configuration = Configuration(SETTINGS, OPTIONS)
+        self.configuration = self._mdl.nvService.make_configuration(
+            settings=SETTINGS,
+            options=OPTIONS
+            )
         self.configuration.read(self.iniFile)
         self.kwargs = {}
         self.kwargs.update(self.configuration.settings)
