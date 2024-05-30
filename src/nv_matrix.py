@@ -93,7 +93,7 @@ class Plugin(PluginBase):
             model -- Reference to the model instance of the application.
             view -- Reference to the main view instance of the application.
             controller -- Reference to the main controller instance of the application.
-            prefs -- reference to the application's global dictionary with settings and options.
+            prefs -- (deprecated) reference to the application's global dictionary with settings and options.
         
         Overrides the superclass method.
         """
