@@ -3,6 +3,7 @@
 	<name>nv_matrix</name>
 	<comment></comment>
 	<projects>
+		<project>novelibre</project>
 		<project>novxlib</project>
 	</projects>
 	<buildSpec>

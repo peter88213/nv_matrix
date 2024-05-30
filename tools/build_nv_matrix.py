@@ -24,6 +24,7 @@ TARGET_FILE = f'{BUILD}nv_matrix.py'
 def main():
     os.makedirs(BUILD, exist_ok=True)
     inliner.run(SOURCE_FILE, TARGET_FILE, 'nvmatrixlib', '../../nv_matrix/src/')
+    inliner.run(TARGET_FILE, TARGET_FILE, 'nvlib', '../../novelibre/src/')
     inliner.run(TARGET_FILE, TARGET_FILE, 'novxlib', '../../novxlib/src/', copynovxlib=False)
     print('Done.')
 

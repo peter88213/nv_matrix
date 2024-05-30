@@ -25,6 +25,7 @@ import webbrowser
 from novxlib.novx_globals import CURRENT_LANGUAGE
 from novxlib.novx_globals import _
 from novxlib.ui.set_icon_tk import set_icon
+from nvlib.plugin.plugin_base import PluginBase
 from nvmatrixlib.table_manager import TableManager
 
 SETTINGS = dict(
@@ -63,13 +64,27 @@ APPLICATION = _('Matrix')
 PLUGIN = f'{APPLICATION} plugin v@release'
 
 
-class Plugin:
+class Plugin(PluginBase):
     """novelibre relationship matrix plugin class."""
     VERSION = '@release'
-    API_VERSION = '4.1'
+    API_VERSION = '4.3'
     DESCRIPTION = 'A section relationship table'
     URL = 'https://github.com/peter88213/nv_matrix'
     _HELP_URL = f'https://peter88213.github.io/{_("nvhelp-en")}/nv_matrix/'
+
+    def disable_menu(self):
+        """Disable menu entries when no project is open.
+        
+        Overrides the superclass method.
+        """
+        self._ui.mainMenu.entryconfig(APPLICATION, state='disabled')
+
+    def enable_menu(self):
+        """Enable menu entries when a project is open.
+        
+        Overrides the superclass method.
+        """
+        self._ui.mainMenu.entryconfig(APPLICATION, state='normal')
 
     def install(self, model, view, controller, prefs):
         """Add a submenu to the 'Tools' menu.
@@ -78,6 +93,9 @@ class Plugin:
             model -- Reference to the model instance of the application.
             view -- Reference to the main view instance of the application.
             controller -- Reference to the main controller instance of the application.
+            prefs -- reference to the application's global dictionary with settings and options.
+        
+        Overrides the superclass method.
         """
         self._mdl = model
         self._ui = view
@@ -108,36 +126,26 @@ class Plugin:
         # Add an entry to the Help menu.
         self._ui.helpMenu.add_command(label=_('Matrix plugin Online help'), command=lambda: webbrowser.open(self._HELP_URL))
 
-    def _start_ui(self):
-        if self._matrixViewer:
-            if self._matrixViewer.isOpen:
-                self._matrixViewer.lift()
-                self._matrixViewer.focus()
-                return
-
-        self._matrixViewer = TableManager(self._mdl, self._ui, self._ctrl, self, **self.kwargs)
-        self._matrixViewer.title(f'{self._mdl.novel.title} - {PLUGIN}')
-        set_icon(self._matrixViewer, icon='mLogo32', default=False)
-
-    def disable_menu(self):
-        """Disable menu entries when no project is open."""
-        self._ui.mainMenu.entryconfig(APPLICATION, state='disabled')
-
-    def enable_menu(self):
-        """Enable menu entries when a project is open."""
-        self._ui.mainMenu.entryconfig(APPLICATION, state='normal')
-
     def lock(self):
-        """Inhibit changes."""
+        """Inhibit changes on the model.
+        
+        Overrides the superclass method.
+        """
         self._ui.mainMenu.entryconfig(APPLICATION, state='disabled')
         self._matrixViewer.lock()
 
     def on_close(self):
-        """Apply changes and close the window."""
+        """Apply changes and close the window.
+        
+        Overrides the superclass method.
+        """
         self.on_quit()
 
     def on_quit(self):
-        """Actions to be performed when novelibre is closed."""
+        """Actions to be performed when novelibre is closed.
+        
+        Overrides the superclass method.
+        """
         if self._matrixViewer:
             if self._matrixViewer.isOpen:
                 self._matrixViewer.on_quit()
@@ -151,7 +159,21 @@ class Plugin:
         self.configuration.write(self.iniFile)
 
     def unlock(self):
-        """Enable changes."""
+        """Enable changes on the model.
+        
+        Overrides the superclass method.
+        """
         self._ui.mainMenu.entryconfig(APPLICATION, state='normal')
         self._matrixViewer.unlock()
+
+    def _start_ui(self):
+        if self._matrixViewer:
+            if self._matrixViewer.isOpen:
+                self._matrixViewer.lift()
+                self._matrixViewer.focus()
+                return
+
+        self._matrixViewer = TableManager(self._mdl, self._ui, self._ctrl, self, **self.kwargs)
+        self._matrixViewer.title(f'{self._mdl.novel.title} - {PLUGIN}')
+        set_icon(self._matrixViewer, icon='mLogo32', default=False)
 
