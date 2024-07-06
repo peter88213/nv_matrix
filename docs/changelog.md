@@ -4,6 +4,14 @@
 
 ## Changelog
 
+
+### v4.2.2
+
+- Library update.
+
+Compatibility: novelibre v4.3 API
+Based on novxlib v4.3.0
+
 ### v4.2.1
 
 - Refactor the code for future API update,
