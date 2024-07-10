@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### v4.3.0
+
+- Move the **Matrix** entry from the main menu to the **Tools** menu.
+- Add a "Matrix" button to the button bar.
+
+Compatibility: novelibre v4.3 API
+Based on novxlib v4.4.0
+
 ### v4.2.2
 
 - Library update.

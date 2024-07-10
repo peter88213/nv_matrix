@@ -26,7 +26,9 @@ from novxlib.novx_globals import CURRENT_LANGUAGE
 from novxlib.novx_globals import _
 from novxlib.ui.set_icon_tk import set_icon
 from nvlib.plugin.plugin_base import PluginBase
+from nvmatrixlib.matrix_button import MatrixButton
 from nvmatrixlib.table_manager import TableManager
+import tkinter as tk
 
 SETTINGS = dict(
         window_geometry='600x800',
@@ -77,14 +79,16 @@ class Plugin(PluginBase):
         
         Overrides the superclass method.
         """
-        self._ui.mainMenu.entryconfig(APPLICATION, state='disabled')
+        self._ui.toolsMenu.entryconfig(APPLICATION, state='disabled')
+        self._matrixButton.disable()
 
     def enable_menu(self):
         """Enable menu entries when a project is open.
         
         Overrides the superclass method.
         """
-        self._ui.mainMenu.entryconfig(APPLICATION, state='normal')
+        self._ui.toolsMenu.entryconfig(APPLICATION, state='normal')
+        self._matrixButton.enable()
 
     def install(self, model, view, controller, prefs=None):
         """Add a submenu to the 'Tools' menu.
@@ -121,20 +125,45 @@ class Plugin(PluginBase):
         self.kwargs.update(self.configuration.options)
 
         # Create an entry to the Tools menu.
-        position = self._ui.mainMenu.index('end')
-        self._ui.mainMenu.insert_command(position, label=APPLICATION, command=self._start_ui)
-        self._ui.mainMenu.entryconfig(APPLICATION, state='disabled')
+        self._ui.toolsMenu.add_command(label=APPLICATION, command=self._start_ui)
+        self._ui.toolsMenu.entryconfig(APPLICATION, state='disabled')
 
         # Add an entry to the Help menu.
         self._ui.helpMenu.add_command(label=_('Matrix plugin Online help'), command=lambda: webbrowser.open(self._HELP_URL))
+
+        #--- Configure the toolbar.
+
+        # Get the icons.
+        prefs = controller.get_preferences()
+        if prefs.get('large_icons', False):
+            size = 24
+        else:
+            size = 16
+        try:
+            homeDir = str(Path.home()).replace('\\', '/')
+            iconPath = f'{homeDir}/.novx/icons/{size}'
+        except:
+            iconPath = None
+        try:
+            matrixIcon = tk.PhotoImage(file=f'{iconPath}/matrix.png')
+        except:
+            matrixIcon = None
+
+        # Put a Separator on the toolbar.
+        tk.Frame(view.toolbar.buttonBar, bg='light gray', width=1).pack(side='left', fill='y', padx=4)
+
+        # Initialize the operation.
+        self._matrixButton = MatrixButton(view, _('Matrix'), matrixIcon, self._start_ui)
 
     def lock(self):
         """Inhibit changes on the model.
         
         Overrides the superclass method.
         """
-        self._ui.mainMenu.entryconfig(APPLICATION, state='disabled')
-        self._matrixViewer.lock()
+        self._ui.toolsMenu.entryconfig(APPLICATION, state='disabled')
+        self._matrixButton.disable()
+        if self._matrixViewer:
+            self._matrixViewer.lock()
 
     def on_close(self):
         """Apply changes and close the window.
@@ -165,10 +194,15 @@ class Plugin(PluginBase):
         
         Overrides the superclass method.
         """
-        self._ui.mainMenu.entryconfig(APPLICATION, state='normal')
-        self._matrixViewer.unlock()
+        self._ui.toolsMenu.entryconfig(APPLICATION, state='normal')
+        self._matrixButton.enable()
+        if self._matrixViewer:
+            self._matrixViewer.unlock()
 
     def _start_ui(self):
+        if not self._mdl.prjFile:
+            return
+
         if self._matrixViewer:
             if self._matrixViewer.isOpen:
                 self._matrixViewer.lift()

@@ -10,11 +10,13 @@ The [novelibre](https://github.com/peter88213/novelibre/) Python program helps a
 
 *nv_matrix* is a plugin providing a section relationship matrix. 
 
+The plugin adds a **Matrix** entry to the *novelibre* **Tools** menu and a 
+![Matrix](src/icons/16/matrix.png) button to the toolbar.
+
 ![Screenshot](docs/Screenshots/screen01.png)
 
 ## Features
 
-- The plugin adds a **Matrix** entry to the *novelibre* main menu.
 - Display section relationships to plot lines, characters, locations, items with a spreadsheet-like matrix.
 - Add/Remove relationships by klicking on the nodes.
 

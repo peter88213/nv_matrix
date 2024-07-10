@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="nv_matrix" basedir=".">
-	<property name="version" value="4.2.2" />
+	<property name="version" value="4.3.0" />
 	<property name="plugin" value="nv_matrix" />
 	
 	<property name="source-path" location="../src" />
@@ -40,12 +40,12 @@
 				
 		<fixcrlf encoding="utf-8" eol="lf" srcdir="${build-path}/${release}" includes="**/*.*" />
 				
+      <copy todir="${build-path}/${release}/icons"> 
+         <fileset dir="${source-path}/icons" />
+      </copy>
+      
 		<copy todir="${build-path}/${release}/locale"> 
 			<fileset dir="${i18n-path}/locale" />
-		</copy>
-		
-		<copy todir="${build-path}/${release}/icons"> 
-			<fileset dir="../icons" />
 		</copy>
 		
       <exec executable="python" failonerror="true">
@@ -70,7 +70,6 @@
 
    <target name="zip" description="generate a zipfile">      
       <copy file="${docs-path}/usage.md" tofile="${build-path}/${release}/README.md" />
-      <fixcrlf encoding="utf-8" eol="lf" srcdir="${build-path}/${release}" includes="**/*.*" />
       <copy file="${source-path}/setup.pyw" todir="${build-path}/${release}" />     
       <zip destfile="${dist-path}/${release}.zip" basedir="${build-path}" />
    </target>
