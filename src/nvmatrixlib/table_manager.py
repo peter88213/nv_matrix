@@ -4,7 +4,7 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/nv_matrix
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
-import sys
+import platform
 from tkinter import ttk
 
 from novxlib.novx_globals import _
@@ -31,7 +31,7 @@ class TableManager(tk.Toplevel):
         self.lift()
         self.focus()
         self.protocol("WM_DELETE_WINDOW", self.on_quit)
-        if sys.platform != 'win32':
+        if platform.system() != 'Windows':
             self.bind(self._KEY_QUIT_PROGRAM[0], self.on_quit)
 
         #--- Register the view.
