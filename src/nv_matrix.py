@@ -181,7 +181,7 @@ class Plugin(PluginBase):
             if self._matrixViewer.isOpen:
                 self._matrixViewer.on_quit()
 
-        #--- Save project specific configuration
+        #--- Save configuration
         for keyword in self.kwargs:
             if keyword in self.configuration.options:
                 self.configuration.options[keyword] = self.kwargs[keyword]
