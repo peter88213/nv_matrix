@@ -15,18 +15,13 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 """
-import gettext
-import locale
-import os
 from pathlib import Path
-import sys
 import webbrowser
 
-from novxlib.novx_globals import CURRENT_LANGUAGE
-from novxlib.novx_globals import _
 from novxlib.ui.set_icon_tk import set_icon
 from nvlib.plugin.plugin_base import PluginBase
 from nvmatrixlib.matrix_button import MatrixButton
+from nvmatrixlib.nvmatrix_globals import _
 from nvmatrixlib.table_manager import TableManager
 import tkinter as tk
 
@@ -46,21 +41,6 @@ SETTINGS = dict(
         color_item_node='aquamarine3',
 )
 OPTIONS = {}
-
-# Initialize localization.
-LOCALE_PATH = f'{os.path.dirname(sys.argv[0])}/locale/'
-try:
-    CURRENT_LANGUAGE = locale.getlocale()[0][:2]
-except:
-    # Fallback for old Windows versions.
-    CURRENT_LANGUAGE = locale.getdefaultlocale()[0][:2]
-try:
-    t = gettext.translation('nv_matrix', LOCALE_PATH, languages=[CURRENT_LANGUAGE])
-    _ = t.gettext
-except:
-
-    def _(message):
-        return message
 
 APPLICATION = _('Matrix')
 PLUGIN = f'{APPLICATION} plugin v@release'

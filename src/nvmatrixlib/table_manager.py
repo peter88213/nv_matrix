@@ -7,8 +7,8 @@ License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 import platform
 from tkinter import ttk
 
-from novxlib.novx_globals import _
 from nvmatrixlib.node import Node
+from nvmatrixlib.nvmatrix_globals import _
 from nvmatrixlib.relations_table import RelationsTable
 from nvmatrixlib.widgets.table_frame import TableFrame
 import tkinter as tk

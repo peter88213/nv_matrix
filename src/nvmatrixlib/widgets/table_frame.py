@@ -31,8 +31,9 @@ https://github.com/peter88213
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 import platform
-import tkinter as tk
 from tkinter import ttk
+
+import tkinter as tk
 
 
 class TableFrame(ttk.Frame):
