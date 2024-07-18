@@ -125,7 +125,7 @@ class Plugin(PluginBase):
         self.kwargs.update(self.configuration.options)
 
         # Create an entry to the Tools menu.
-        self._ui.toolsMenu.add_command(label=APPLICATION, command=self._start_ui)
+        self._ui.toolsMenu.add_command(label=APPLICATION, command=self._start_viewer)
         self._ui.toolsMenu.entryconfig(APPLICATION, state='disabled')
 
         # Add an entry to the Help menu.
@@ -153,7 +153,7 @@ class Plugin(PluginBase):
         tk.Frame(view.toolbar.buttonBar, bg='light gray', width=1).pack(side='left', fill='y', padx=4)
 
         # Initialize the operation.
-        self._matrixButton = MatrixButton(view, _('Matrix'), matrixIcon, self._start_ui)
+        self._matrixButton = MatrixButton(view, _('Matrix'), matrixIcon, self._start_viewer)
 
     def lock(self):
         """Inhibit changes on the model.
@@ -199,12 +199,14 @@ class Plugin(PluginBase):
         if self._matrixViewer:
             self._matrixViewer.unlock()
 
-    def _start_ui(self):
+    def _start_viewer(self):
         if not self._mdl.prjFile:
             return
 
         if self._matrixViewer:
             if self._matrixViewer.isOpen:
+                if self._matrixViewer.state() == 'iconic':
+                    self._matrixViewer.state('normal')
                 self._matrixViewer.lift()
                 self._matrixViewer.focus()
                 return
