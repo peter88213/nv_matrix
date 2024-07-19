@@ -49,7 +49,7 @@ PLUGIN = f'{APPLICATION} plugin v@release'
 class Plugin(PluginBase):
     """novelibre relationship matrix plugin class."""
     VERSION = '@release'
-    API_VERSION = '4.3'
+    API_VERSION = '4.5'
     DESCRIPTION = 'A section relationship table'
     URL = 'https://github.com/peter88213/nv_matrix'
     _HELP_URL = f'https://peter88213.github.io/{_("nvhelp-en")}/nv_matrix/'

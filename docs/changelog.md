@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### v4.4.0
+
+- Fix a bug where the novelibre desktop mouse scrolling takes effect on the matrix view.
+- novelibre API update.
+
+Compatibility: novelibre v4.5 API
+Based on novxlib v4.4.0
+
 ### v4.3.2
 
 - Refactor localization.
