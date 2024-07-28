@@ -5,6 +5,10 @@
 ## Changelog
 
 
+### v4.4.1
+
+- Fix localization issues by updating to novxlib v4.4.2.
+
 ### v4.4.0
 
 - Fix a bug where the novelibre desktop mouse scrolling takes effect on the matrix view.
