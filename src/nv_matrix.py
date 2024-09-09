@@ -18,10 +18,10 @@ GNU General Public License for more details.
 from pathlib import Path
 import webbrowser
 
+from nvmatrixlib.nvmatrix_globals import _
 from novxlib.ui.set_icon_tk import set_icon
 from nvlib.plugin.plugin_base import PluginBase
 from nvmatrixlib.matrix_button import MatrixButton
-from nvmatrixlib.nvmatrix_globals import _
 from nvmatrixlib.table_manager import TableManager
 import tkinter as tk
 

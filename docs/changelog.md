@@ -5,6 +5,13 @@
 ## Changelog
 
 
+### Version 4.4.2
+
+- Refactor: Change import order for a quick start.
+
+Compatibility: novelibre version 4.5 API
+Based on novxlib version 4.6.3
+
 ### Version 4.4.1
 
 - Fix localization issues by updating to novxlib v4.4.2.
