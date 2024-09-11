@@ -5,6 +5,15 @@
 ## Changelog
 
 
+### Version 4.5.1
+
+- Fix a regression from version 4.5.0 where the "Quit" key does not work on non-Windows platforms.
+- Refactor: Undo some renamings from version 4.5.0.
+- Consider FreeBSD.
+
+Compatibility: novelibre 4.5 API
+Based on novxlib 4.6.4
+
 ### Version 4.5.0
 
 - Provide shortcuts and key bindings for Mac OS.

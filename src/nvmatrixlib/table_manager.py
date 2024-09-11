@@ -35,7 +35,7 @@ class TableManager(tk.Toplevel):
         self._ui.register_view(self)
 
         #--- Event bindings.
-        if PLATFORM == 'win':
+        if PLATFORM != 'win':
             self.bind(KEYS.QUIT_PROGRAM[0], self.on_quit)
         self.protocol("WM_DELETE_WINDOW", self.on_quit)
 
