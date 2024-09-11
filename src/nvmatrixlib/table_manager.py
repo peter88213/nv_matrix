@@ -4,10 +4,11 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/nv_matrix
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
-import platform
 from tkinter import ttk
 
+from nvmatrixlib.key_definitions import KEYS
 from nvmatrixlib.node import Node
+from nvmatrixlib.nvmatrix_globals import PLATFORM
 from nvmatrixlib.nvmatrix_globals import _
 from nvmatrixlib.relations_table import RelationsTable
 from nvmatrixlib.widgets.table_frame import TableFrame
@@ -15,7 +16,6 @@ import tkinter as tk
 
 
 class TableManager(tk.Toplevel):
-    _KEY_QUIT_PROGRAM = ('<Control-q>', 'Ctrl-Q')
 
     def __init__(self, model, view, controller, plugin, **kwargs):
         self._mdl = model
@@ -30,11 +30,14 @@ class TableManager(tk.Toplevel):
         self.geometry(kwargs['window_geometry'])
         self.lift()
         self.focus()
-        self.protocol("WM_DELETE_WINDOW", self.on_quit)
-        if platform.system() != 'Windows':
-            self.bind(self._KEY_QUIT_PROGRAM[0], self.on_quit)
 
+        #--- Register this view.
         self._ui.register_view(self)
+
+        #--- Event bindings.
+        if PLATFORM == 'win':
+            self.bind(KEYS.QUIT_PROGRAM[0], self.on_quit)
+        self.protocol("WM_DELETE_WINDOW", self.on_quit)
 
         #--- Main menu.
         self.mainMenu = tk.Menu(self)
@@ -52,7 +55,7 @@ class TableManager(tk.Toplevel):
 
         #--- Initialize the view update mechanism.
         self._skipUpdate = False
-        self.bind('<Control-Button-1>', self.on_element_change)
+        self.bind(KEYS.TOGGLE_STATE, self.on_element_change)
 
         # "Close" button.
         ttk.Button(self, text=_('Close'), command=self.on_quit).pack(side='right', padx=5, pady=5)

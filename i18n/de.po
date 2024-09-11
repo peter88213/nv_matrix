@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 4.4.2\n"
-"POT-Creation-Date: 2024-09-09 15:02:59\n"
-"PO-Revision-Date: 2024-09-09 15:02:59\n"
+"Project-Id-Version: 4.5.0\n"
+"POT-Creation-Date: 2024-09-11 20:45:51\n"
+"PO-Revision-Date: 2024-09-11 20:45:51\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -18,6 +18,9 @@ msgstr "Figuren"
 
 msgid "Close"
 msgstr "Schließen"
+
+msgid "Ctrl"
+msgstr "Strg"
 
 msgid "Items"
 msgstr "Gegenstände"

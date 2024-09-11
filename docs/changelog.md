@@ -5,6 +5,15 @@
 ## Changelog
 
 
+### Version 4.5.0
+
+- Provide shortcuts and key bindings for Mac OS.
+- Refactor event bindings.
+- Automatically resize the setup window.
+
+Compatibility: novelibre 4.5 API
+Based on novxlib 4.6.4
+
 ### Version 4.4.2
 
 - Refactor: Change import order for a quick start.

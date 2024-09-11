@@ -28,8 +28,8 @@ https://stackoverflow.com/questions/63629407/tkinter-how-to-stop-scrolling-above
 https://stackoverflow.com/questions/51538818/python-tkinter-binding-child-widgets
 
 Copyright (c) 2024 Peter Triesberger
-https://github.com/peter88213
-License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
+https://github.com/peter88213/
+License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
 import platform
 from tkinter import ttk
@@ -154,26 +154,26 @@ class TableFrame(ttk.Frame):
     def on_mouse_wheel(self, event):
         """Event handler for vertical scrolling."""
         if platform.system() == 'Windows':
-            self.yview_scroll(int(-1 * (event.delta / 120)), "units")
+            self.yview_scroll(int(-1 * (event.delta / 120)), 'units')
         elif platform.system() == 'Darwin':
-            self.yview_scroll(int(-1 * event.delta), "units")
+            self.yview_scroll(int(-1 * event.delta), 'units')
         else:
             if event.num == 4:
-                self.yview_scroll(-1, "units")
+                self.yview_scroll(-1, 'units')
             elif event.num == 5:
-                self.yview_scroll(1, "units")
+                self.yview_scroll(1, 'units')
 
-    def on_shift_mouse_wheel(self, event):
+    def move_time_scale(self, event):
         """Event handler for horizontal scrolling."""
         if platform.system() == 'Windows':
-            self.xview_scroll(int(-1 * (event.delta / 120)), "units")
+            self.xview_scroll(int(-1 * (event.delta / 120)), 'units')
         elif platform.system() == 'Darwin':
-            self.xview_scroll(int(-1 * event.delta), "units")
+            self.xview_scroll(int(-1 * event.delta), 'units')
         else:
             if event.num == 4:
-                self.xview_scroll(-1, "units")
+                self.xview_scroll(-1, 'units')
             elif event.num == 5:
-                self.xview_scroll(1, "units")
+                self.xview_scroll(1, 'units')
 
     def xview(self, *args):
         self._columnTitlesCanvas.xview(*args)
@@ -196,44 +196,44 @@ class TableFrame(ttk.Frame):
     def _bind_mousewheel(self, event=None):
         if platform.system() == 'Linux':
             # Vertical scrolling
-            self._rowTitlesCanvas.bind_all("<Button-4>", self.on_mouse_wheel)
-            self._rowTitlesCanvas.bind_all("<Button-5>", self.on_mouse_wheel)
-            self._displayCanvas.bind_all("<Button-4>", self.on_mouse_wheel)
-            self._displayCanvas.bind_all("<Button-5>", self.on_mouse_wheel)
+            self._rowTitlesCanvas.bind_all('<Button-4>', self.on_mouse_wheel)
+            self._rowTitlesCanvas.bind_all('<Button-5>', self.on_mouse_wheel)
+            self._displayCanvas.bind_all('<Button-4>', self.on_mouse_wheel)
+            self._displayCanvas.bind_all('<Button-5>', self.on_mouse_wheel)
 
             # Horizontal scrolling
-            self._rowTitlesCanvas.bind_all("<Shift-Button-4>", self.on_shift_mouse_wheel)
-            self._rowTitlesCanvas.bind_all("<Shift-Button-5>", self.on_shift_mouse_wheel)
-            self._displayCanvas.bind_all("<Shift-Button-4>", self.on_shift_mouse_wheel)
-            self._displayCanvas.bind_all("<Shift-Button-5>", self.on_shift_mouse_wheel)
+            self._rowTitlesCanvas.bind_all('<Shift-Button-4>', self.move_time_scale)
+            self._rowTitlesCanvas.bind_all('<Shift-Button-5>', self.move_time_scale)
+            self._displayCanvas.bind_all('<Shift-Button-4>', self.move_time_scale)
+            self._displayCanvas.bind_all('<Shift-Button-5>', self.move_time_scale)
         else:
             # Vertical scrolling
-            self._rowTitlesCanvas.bind_all("<MouseWheel>", self.on_mouse_wheel)
-            self._displayCanvas.bind_all("<MouseWheel>", self.on_mouse_wheel)
+            self._rowTitlesCanvas.bind_all('<MouseWheel>', self.on_mouse_wheel)
+            self._displayCanvas.bind_all('<MouseWheel>', self.on_mouse_wheel)
 
             # Horizontal scrolling
-            self._rowTitlesCanvas.bind_all("<Shift-MouseWheel>", self.on_shift_mouse_wheel)
-            self._displayCanvas.bind_all("<Shift-MouseWheel>", self.on_shift_mouse_wheel)
+            self._rowTitlesCanvas.bind_all('<Shift-MouseWheel>', self.move_time_scale)
+            self._displayCanvas.bind_all('<Shift-MouseWheel>', self.move_time_scale)
 
     def _unbind_mousewheel(self, event=None):
         if platform.system() == 'Linux':
             # Vertical scrolling
-            self._rowTitlesCanvas.unbind_all("<Button-4>")
-            self._rowTitlesCanvas.unbind_all("<Button-5>")
-            self._displayCanvas.unbind_all("<Button-4>")
-            self._displayCanvas.unbind_all("<Button-5>")
+            self._rowTitlesCanvas.unbind_all('<Button-4>')
+            self._rowTitlesCanvas.unbind_all('<Button-5>')
+            self._displayCanvas.unbind_all('<Button-4>')
+            self._displayCanvas.unbind_all('<Button-5>')
 
             # Horizontal scrolling
-            self._rowTitlesCanvas.unbind_all("<Shift-Button-4>")
-            self._rowTitlesCanvas.unbind_all("<Shift-Button-5>")
-            self._displayCanvas.unbind_all("<Shift-Button-4>")
-            self._displayCanvas.unbind_all("<Shift-Button-5>")
+            self._rowTitlesCanvas.unbind_all('<Shift-Button-4>')
+            self._rowTitlesCanvas.unbind_all('<Shift-Button-5>')
+            self._displayCanvas.unbind_all('<Shift-Button-4>')
+            self._displayCanvas.unbind_all('<Shift-Button-5>')
         else:
             # Vertical scrolling
-            self._rowTitlesCanvas.unbind_all("<MouseWheel>")
-            self._displayCanvas.unbind_all("<MouseWheel>")
+            self._rowTitlesCanvas.unbind_all('<MouseWheel>')
+            self._displayCanvas.unbind_all('<MouseWheel>')
 
             # Horizontal scrolling
-            self._rowTitlesCanvas.unbind_all("<Shift-MouseWheel>")
-            self._displayCanvas.unbind_all("<Shift-MouseWheel>")
+            self._rowTitlesCanvas.unbind_all('<Shift-MouseWheel>')
+            self._displayCanvas.unbind_all('<Shift-MouseWheel>')
 
