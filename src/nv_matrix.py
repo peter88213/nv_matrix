@@ -16,12 +16,12 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 """
 from pathlib import Path
+from tkinter import ttk
 import webbrowser
 
 from nvmatrixlib.nvmatrix_globals import _
 from novxlib.ui.set_icon_tk import set_icon
 from nvlib.plugin.plugin_base import PluginBase
-from nvmatrixlib.matrix_button import MatrixButton
 from nvmatrixlib.table_manager import TableManager
 import tkinter as tk
 
@@ -60,7 +60,7 @@ class Plugin(PluginBase):
         Overrides the superclass method.
         """
         self._ui.toolsMenu.entryconfig(APPLICATION, state='disabled')
-        self._matrixButton.disable()
+        self._matrixButton.config(state='disabled')
 
     def enable_menu(self):
         """Enable menu entries when a project is open.
@@ -68,7 +68,7 @@ class Plugin(PluginBase):
         Overrides the superclass method.
         """
         self._ui.toolsMenu.entryconfig(APPLICATION, state='normal')
-        self._matrixButton.enable()
+        self._matrixButton.config(state='normal')
 
     def install(self, model, view, controller, prefs=None):
         """Add a submenu to the 'Tools' menu.
@@ -112,28 +112,7 @@ class Plugin(PluginBase):
         self._ui.helpMenu.add_command(label=_('Matrix plugin Online help'), command=lambda: webbrowser.open(self._HELP_URL))
 
         #--- Configure the toolbar.
-
-        # Get the icons.
-        prefs = controller.get_preferences()
-        if prefs.get('large_icons', False):
-            size = 24
-        else:
-            size = 16
-        try:
-            homeDir = str(Path.home()).replace('\\', '/')
-            iconPath = f'{homeDir}/.novx/icons/{size}'
-        except:
-            iconPath = None
-        try:
-            matrixIcon = tk.PhotoImage(file=f'{iconPath}/matrix.png')
-        except:
-            matrixIcon = None
-
-        # Put a Separator on the toolbar.
-        tk.Frame(view.toolbar.buttonBar, bg='light gray', width=1).pack(side='left', fill='y', padx=4)
-
-        # Initialize the operation.
-        self._matrixButton = MatrixButton(view, _('Matrix'), matrixIcon, self._start_viewer)
+        self._configure_toolbar()
 
     def lock(self):
         """Inhibit changes on the model.
@@ -178,6 +157,48 @@ class Plugin(PluginBase):
         self._matrixButton.enable()
         if self._matrixViewer:
             self._matrixViewer.unlock()
+
+    def _configure_toolbar(self):
+
+        # Get the icons.
+        prefs = self._ctrl.get_preferences()
+        if prefs.get('large_icons', False):
+            size = 24
+        else:
+            size = 16
+        try:
+            homeDir = str(Path.home()).replace('\\', '/')
+            iconPath = f'{homeDir}/.novx/icons/{size}'
+        except:
+            iconPath = None
+        try:
+            matrixIcon = tk.PhotoImage(file=f'{iconPath}/matrix.png')
+        except:
+            matrixIcon = None
+
+        # Put a Separator on the toolbar.
+        tk.Frame(self._ui.toolbar.buttonBar, bg='light gray', width=1).pack(side='left', fill='y', padx=4)
+
+        # Initialize the operation.
+        self._matrixButton = ttk.Button(
+            self._ui.toolbar.buttonBar,
+            text=_('Matrix'),
+            image=matrixIcon,
+            command=self._start_viewer
+            )
+        self._matrixButton.pack(side='left')
+        self._matrixButton.image = matrixIcon
+
+        # Initialize tooltip.
+        if not prefs['enable_hovertips']:
+            return
+
+        try:
+            from idlelib.tooltip import Hovertip
+        except ModuleNotFoundError:
+            return
+
+        Hovertip(self._matrixButton, self._matrixButton['text'])
 
     def _start_viewer(self):
         if not self._mdl.prjFile:
