@@ -4,7 +4,7 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/nv_matrix
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
-from nvmatrixlib.key_definitions import KEYS
+from nvmatrixlib.platform_settings import MOUSE
 import tkinter as tk
 
 
@@ -30,7 +30,7 @@ class Node(tk.Label):
         super().__init__(master, cnf, **kw)
         self.config(background=self.colorBg)
         self.config(foreground=self.colorFg)
-        self.bind(KEYS.TOGGLE_STATE, self._toggle_state)
+        self.bind(MOUSE.TOGGLE_STATE, self._toggle_state)
 
     @property
     def state(self):

@@ -6,10 +6,11 @@ License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 from tkinter import ttk
 
-from nvmatrixlib.key_definitions import KEYS
 from nvmatrixlib.node import Node
-from nvmatrixlib.nvmatrix_globals import PLATFORM
 from nvmatrixlib.nvmatrix_globals import _
+from nvmatrixlib.platform_settings import KEYS
+from nvmatrixlib.platform_settings import MOUSE
+from nvmatrixlib.platform_settings import PLATFORM
 from nvmatrixlib.relations_table import RelationsTable
 from nvmatrixlib.widgets.table_frame import TableFrame
 import tkinter as tk
@@ -55,7 +56,7 @@ class TableManager(tk.Toplevel):
 
         #--- Initialize the view update mechanism.
         self._skipUpdate = False
-        self.bind(KEYS.TOGGLE_STATE, self.on_element_change)
+        self.bind(MOUSE.TOGGLE_STATE, self.on_element_change)
 
         # "Close" button.
         ttk.Button(self, text=_('Close'), command=self.on_quit).pack(side='right', padx=5, pady=5)

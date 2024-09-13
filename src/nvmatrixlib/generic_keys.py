@@ -10,5 +10,3 @@ from nvmatrixlib.nvmatrix_globals import _
 class GenericKeys:
 
     QUIT_PROGRAM = ('<Control-q>', f'{_("Ctrl")}-Q')
-
-    TOGGLE_STATE = '<Control-Button-1>'
