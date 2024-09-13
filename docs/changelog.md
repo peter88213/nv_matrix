@@ -5,6 +5,13 @@
 ## Changelog
 
 
+### Version 4.5.2
+
+- Refactor the event bindings.
+
+Compatibility: novelibre 4.5 API
+Based on novxlib 4.6.4
+
 ### Version 4.5.1
 
 - Fix a regression from version 4.5.0 where the "Quit" key does not work on non-Windows platforms.
