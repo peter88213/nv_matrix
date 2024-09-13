@@ -22,7 +22,7 @@ The plugin adds a **Matrix** entry to the *novelibre* **Tools** menu and a
 
 ## Requirements
 
-- [novelibre](https://github.com/peter88213/novelibre/) version 4.5+
+- [novelibre](https://github.com/peter88213/novelibre/) version 4.11+
 
 ## Download and install
 

@@ -5,6 +5,17 @@
 ## Changelog
 
 
+### Version 4.6.0
+
+- Add tootlip.
+
+Refactor:
+- Separate keyboard settings and mouse operation settings.
+- Put everything in the new platform_settings module.
+
+Compatibility: novelibre 4.11 API
+Based on novxlib 4.6.4
+
 ### Version 4.5.2
 
 - Refactor the event bindings.
