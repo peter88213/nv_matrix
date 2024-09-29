@@ -8,9 +8,9 @@ from tkinter import ttk
 
 from nvmatrixlib.node import Node
 from nvmatrixlib.nvmatrix_globals import _
-from nvmatrixlib.platform_settings import KEYS
-from nvmatrixlib.platform_settings import MOUSE
-from nvmatrixlib.platform_settings import PLATFORM
+from nvmatrixlib.platform.platform_settings import KEYS
+from nvmatrixlib.platform.platform_settings import MOUSE
+from nvmatrixlib.platform.platform_settings import PLATFORM
 from nvmatrixlib.relations_table import RelationsTable
 from nvmatrixlib.widgets.table_frame import TableFrame
 import tkinter as tk

@@ -4,7 +4,7 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/nv_matrix
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
-from nvmatrixlib.platform_settings import MOUSE
+from nvmatrixlib.platform.platform_settings import MOUSE
 import tkinter as tk
 
 

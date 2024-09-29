@@ -4,11 +4,11 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/nv_matrix
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
-from nvmatrixlib.generic_keys import GenericKeys
-from nvmatrixlib.generic_mouse import GenericMouse
-from nvmatrixlib.mac_keys import MacKeys
-from nvmatrixlib.mac_mouse import MacMouse
-from nvmatrixlib.windows_keys import WindowsKeys
+from nvmatrixlib.platform.generic_keys import GenericKeys
+from nvmatrixlib.platform.generic_mouse import GenericMouse
+from nvmatrixlib.platform.mac_keys import MacKeys
+from nvmatrixlib.platform.mac_mouse import MacMouse
+from nvmatrixlib.platform.windows_keys import WindowsKeys
 
 import platform
 
