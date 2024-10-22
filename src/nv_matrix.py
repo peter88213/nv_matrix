@@ -25,26 +25,6 @@ from nvlib.plugin.plugin_base import PluginBase
 from nvmatrixlib.table_manager import TableManager
 import tkinter as tk
 
-SETTINGS = dict(
-        window_geometry='600x800',
-        color_bg_00='gray80',
-        color_bg_01='gray85',
-        color_bg_10='gray95',
-        color_bg_11='white',
-        color_arc_heading='deepSkyBlue',
-        color_arc_node='deepSkyBlue3',
-        color_character_heading='goldenrod1',
-        color_character_node='goldenrod3',
-        color_location_heading='coral1',
-        color_location_node='coral3',
-        color_item_heading='aquamarine1',
-        color_item_node='aquamarine3',
-)
-OPTIONS = {}
-
-APPLICATION = _('Matrix')
-PLUGIN = f'{APPLICATION} plugin v@release'
-
 
 class Plugin(PluginBase):
     """novelibre relationship matrix plugin class."""
@@ -54,12 +34,32 @@ class Plugin(PluginBase):
     URL = 'https://github.com/peter88213/nv_matrix'
     _HELP_URL = f'https://peter88213.github.io/{_("nvhelp-en")}/nv_matrix/'
 
+    FEATURE = _('Matrix')
+    INI_FILENAME = 'matrix.ini'
+    INI_FILEPATH = '.novx/config'
+    SETTINGS = dict(
+            window_geometry='600x800',
+            color_bg_00='gray80',
+            color_bg_01='gray85',
+            color_bg_10='gray95',
+            color_bg_11='white',
+            color_arc_heading='deepSkyBlue',
+            color_arc_node='deepSkyBlue3',
+            color_character_heading='goldenrod1',
+            color_character_node='goldenrod3',
+            color_location_heading='coral1',
+            color_location_node='coral3',
+            color_item_heading='aquamarine1',
+            color_item_node='aquamarine3',
+    )
+    OPTIONS = {}
+
     def disable_menu(self):
         """Disable menu entries when no project is open.
         
         Overrides the superclass method.
         """
-        self._ui.toolsMenu.entryconfig(APPLICATION, state='disabled')
+        self._ui.toolsMenu.entryconfig(self.FEATURE, state='disabled')
         self._matrixButton.config(state='disabled')
 
     def enable_menu(self):
@@ -67,7 +67,7 @@ class Plugin(PluginBase):
         
         Overrides the superclass method.
         """
-        self._ui.toolsMenu.entryconfig(APPLICATION, state='normal')
+        self._ui.toolsMenu.entryconfig(self.FEATURE, state='normal')
         self._matrixButton.config(state='normal')
 
     def install(self, model, view, controller, prefs=None):
@@ -91,13 +91,13 @@ class Plugin(PluginBase):
         #--- Load configuration.
         try:
             homeDir = str(Path.home()).replace('\\', '/')
-            configDir = f'{homeDir}/.novx/config'
+            configDir = f'{homeDir}/{self.INI_FILEPATH}'
         except:
             configDir = '.'
-        self.iniFile = f'{configDir}/matrix.ini'
+        self.iniFile = f'{configDir}/{self.INI_FILENAME}'
         self.configuration = self._mdl.nvService.make_configuration(
-            settings=SETTINGS,
-            options=OPTIONS
+            settings=self.SETTINGS,
+            options=self.OPTIONS
             )
         self.configuration.read(self.iniFile)
         self.kwargs = {}
@@ -105,8 +105,8 @@ class Plugin(PluginBase):
         self.kwargs.update(self.configuration.options)
 
         # Create an entry to the Tools menu.
-        self._ui.toolsMenu.add_command(label=APPLICATION, command=self._start_viewer)
-        self._ui.toolsMenu.entryconfig(APPLICATION, state='disabled')
+        self._ui.toolsMenu.add_command(label=self.FEATURE, command=self._start_viewer)
+        self._ui.toolsMenu.entryconfig(self.FEATURE, state='disabled')
 
         # Add an entry to the Help menu.
         self._ui.helpMenu.add_command(label=_('Matrix plugin Online help'), command=lambda: webbrowser.open(self._HELP_URL))
@@ -119,7 +119,7 @@ class Plugin(PluginBase):
         
         Overrides the superclass method.
         """
-        self._ui.toolsMenu.entryconfig(APPLICATION, state='disabled')
+        self._ui.toolsMenu.entryconfig(self.FEATURE, state='disabled')
         self._matrixButton.disable()
         if self._matrixViewer:
             self._matrixViewer.lock()
@@ -153,7 +153,7 @@ class Plugin(PluginBase):
         
         Overrides the superclass method.
         """
-        self._ui.toolsMenu.entryconfig(APPLICATION, state='normal')
+        self._ui.toolsMenu.entryconfig(self.FEATURE, state='normal')
         self._matrixButton.enable()
         if self._matrixViewer:
             self._matrixViewer.unlock()
@@ -213,6 +213,6 @@ class Plugin(PluginBase):
                 return
 
         self._matrixViewer = TableManager(self._mdl, self._ui, self._ctrl, self, **self.kwargs)
-        self._matrixViewer.title(f'{self._mdl.novel.title} - {PLUGIN}')
+        self._matrixViewer.title(f'{self._mdl.novel.title} - {self.FEATURE} plugin v@release')
         set_icon(self._matrixViewer, icon='mLogo32', default=False)
 
