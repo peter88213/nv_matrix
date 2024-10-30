@@ -213,6 +213,6 @@ class Plugin(PluginBase):
                 return
 
         self._matrixViewer = TableManager(self._mdl, self._ui, self._ctrl, self, **self.kwargs)
-        self._matrixViewer.title(f'{self._mdl.novel.title} - {self.FEATURE} plugin v@release')
+        self._matrixViewer.title(f'{self._mdl.novel.title} - {self.FEATURE}')
         set_icon(self._matrixViewer, icon='mLogo32', default=False)
 
