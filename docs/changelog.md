@@ -4,6 +4,21 @@
 
 ## Changelog
 
+### Version 4.6.1
+
+- Fix a bug where the project lock has no effect on user operation.
+- Fix a bug where the "Close" button moves to a wrong position after refreshing the view.
+- Change the window title.
+
+Refactor for better maintainability:
+
+- Make the TableManager a ViewComponentBase subclass.
+- Link the source code to the new "apptk" GUI library.
+- Replae global constants with class constants.
+- Move platform-specific modules to their own package.
+
+Compatible with novelibre 4.11
+Based on apptk 2.2.0
 
 ### Version 4.6.0
 
