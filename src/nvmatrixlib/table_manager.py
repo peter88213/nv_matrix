@@ -6,6 +6,7 @@ License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 from tkinter import ttk
 
+from apptk.view.view_component_base import ViewComponentBase
 from nvmatrixlib.node import Node
 from nvmatrixlib.nvmatrix_globals import _
 from nvmatrixlib.platform.platform_settings import KEYS
@@ -16,15 +17,14 @@ from nvmatrixlib.widgets.table_frame import TableFrame
 import tkinter as tk
 
 
-class TableManager(tk.Toplevel):
+class TableManager(ViewComponentBase, tk.Toplevel):
 
-    def __init__(self, model, view, controller, plugin, **kwargs):
-        self._mdl = model
-        self._ui = view
-        self._ctrl = controller
-        self._plugin = plugin
+    def __init__(self, model, view, controller, manager, **kwargs):
+        ViewComponentBase.__init__(self, model, view, controller)
+        tk.Toplevel.__init__(self)
+
+        self._manager = manager
         self._kwargs = kwargs
-        super().__init__()
 
         self._statusText = ''
 
@@ -65,17 +65,19 @@ class TableManager(tk.Toplevel):
         """Inhibit element change."""
         Node.isLocked = True
 
+    def on_element_change(self, event=None):
+        """Update the model, but not the view."""
+        self._skipUpdate = True
+        self._relationsTable.get_nodes()
+        self._skipUpdate = False
+
     def on_quit(self, event=None):
         self.isOpen = False
-        self._plugin.kwargs['window_geometry'] = self.winfo_geometry()
+        self._manager.kwargs['window_geometry'] = self.winfo_geometry()
         self.mainWindow.destroy()
         # this is necessary for deleting the event bindings
         self._ui.unregister_view(self)
         self.destroy()
-
-    def unlock(self):
-        """Enable element change."""
-        Node.isLocked = False
 
     def refresh(self):
         """Refresh the view after changes have been made "outsides"."""
@@ -88,8 +90,7 @@ class TableManager(tk.Toplevel):
                 self._relationsTable.draw_matrix(self.mainWindow)
                 self._relationsTable.set_nodes()
 
-    def on_element_change(self, event=None):
-        """Update the model, but not the view."""
-        self._skipUpdate = True
-        self._relationsTable.get_nodes()
-        self._skipUpdate = False
+    def unlock(self):
+        """Enable element change."""
+        Node.isLocked = False
+
