@@ -19,7 +19,7 @@ from pathlib import Path
 from tkinter import ttk
 import webbrowser
 
-from apptk.view.set_icon_tk import set_icon
+from mvclib.view.set_icon_tk import set_icon
 from nvlib.plugin.plugin_base import PluginBase
 from nvmatrixlib.nvmatrix_globals import _
 from nvmatrixlib.table_manager import TableManager

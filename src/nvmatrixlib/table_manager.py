@@ -6,7 +6,7 @@ License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 from tkinter import ttk
 
-from apptk.view.view_component_base import ViewComponentBase
+from mvclib.view.view_component_base import ViewComponentBase
 from nvmatrixlib.node import Node
 from nvmatrixlib.nvmatrix_globals import _
 from nvmatrixlib.platform.platform_settings import KEYS
@@ -33,7 +33,7 @@ class TableManager(ViewComponentBase, tk.Toplevel):
         self.focus()
 
         #--- Register this view component.
-        self._ui.register_view(self)
+        self._ui.register_client(self)
         if self._ctrl.isLocked:
             self.lock()
 
@@ -80,7 +80,7 @@ class TableManager(ViewComponentBase, tk.Toplevel):
         self._manager.kwargs['window_geometry'] = self.winfo_geometry()
         self.tableFrame.destroy()
         # this is necessary for deleting the event bindings
-        self._ui.unregister_view(self)
+        self._ui.unregister_client(self)
         self.destroy()
 
     def refresh(self):
