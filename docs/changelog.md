@@ -4,6 +4,13 @@
 
 ## Changelog
 
+### Version 4.6.2
+
+No longer disable the "Matrix" menu entry when locking the project.
+
+Compatible with novelibre 4.11
+Based on apptk 2.2.0
+
 ### Version 4.6.1
 
 - Fix a bug where the project lock has no effect on user operation.

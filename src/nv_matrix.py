@@ -119,8 +119,6 @@ class Plugin(PluginBase):
         
         Overrides the superclass method.
         """
-        self._ui.toolsMenu.entryconfig(self.FEATURE, state='disabled')
-        self._matrixButton.disable()
         if self._matrixViewer:
             self._matrixViewer.lock()
 
@@ -153,8 +151,6 @@ class Plugin(PluginBase):
         
         Overrides the superclass method.
         """
-        self._ui.toolsMenu.entryconfig(self.FEATURE, state='normal')
-        self._matrixButton.enable()
         if self._matrixViewer:
             self._matrixViewer.unlock()
 
