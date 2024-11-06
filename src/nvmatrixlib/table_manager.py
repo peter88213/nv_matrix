@@ -34,7 +34,7 @@ class TableManager(SubController, Observer, tk.Toplevel):
         self.focus()
 
         #--- Register this view component.
-        self._ui.register_client(self)
+        self._mdl.add_observer(self)
         if self._ctrl.isLocked:
             self.lock()
 
@@ -81,7 +81,7 @@ class TableManager(SubController, Observer, tk.Toplevel):
         self._manager.kwargs['window_geometry'] = self.winfo_geometry()
         self.tableFrame.destroy()
         # this is necessary for deleting the event bindings
-        self._ui.unregister_client(self)
+        self._mdl.delete_observer(self)
         self.destroy()
 
     def refresh(self):

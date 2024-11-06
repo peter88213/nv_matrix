@@ -54,22 +54,6 @@ class Plugin(PluginBase):
     )
     OPTIONS = {}
 
-    def disable_menu(self):
-        """Disable menu entries when no project is open.
-        
-        Overrides the superclass method.
-        """
-        self._ui.toolsMenu.entryconfig(self.FEATURE, state='disabled')
-        self._matrixButton.config(state='disabled')
-
-    def enable_menu(self):
-        """Enable menu entries when a project is open.
-        
-        Overrides the superclass method.
-        """
-        self._ui.toolsMenu.entryconfig(self.FEATURE, state='normal')
-        self._matrixButton.config(state='normal')
-
     def install(self, model, view, controller):
         """Add a submenu to the 'Tools' menu.
         
@@ -114,13 +98,27 @@ class Plugin(PluginBase):
         #--- Configure the toolbar.
         self._configure_toolbar()
 
+    def disable_menu(self):
+        """Disable menu entries when no project is open.
+        
+        Overrides the superclass method.
+        """
+        self._ui.toolsMenu.entryconfig(self.FEATURE, state='disabled')
+        self._matrixButton.config(state='disabled')
+
+    def enable_menu(self):
+        """Enable menu entries when a project is open.
+        
+        Overrides the superclass method.
+        """
+        self._ui.toolsMenu.entryconfig(self.FEATURE, state='normal')
+        self._matrixButton.config(state='normal')
+
     def lock(self):
         """Inhibit changes on the model.
         
         Overrides the superclass method.
         """
-        self._ui.toolsMenu.entryconfig(self.FEATURE, state='disabled')
-        self._matrixButton.disable()
         if self._matrixViewer:
             self._matrixViewer.lock()
 
@@ -153,8 +151,6 @@ class Plugin(PluginBase):
         
         Overrides the superclass method.
         """
-        self._ui.toolsMenu.entryconfig(self.FEATURE, state='normal')
-        self._matrixButton.enable()
         if self._matrixViewer:
             self._matrixViewer.unlock()
 
