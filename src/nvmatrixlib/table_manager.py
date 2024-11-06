@@ -6,7 +6,8 @@ License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 from tkinter import ttk
 
-from mvclib.view.view_component_base import ViewComponentBase
+from mvclib.controller.sub_controller import SubController
+from mvclib.view.observer import Observer
 from nvmatrixlib.node import Node
 from nvmatrixlib.nvmatrix_globals import _
 from nvmatrixlib.platform.platform_settings import KEYS
@@ -17,10 +18,10 @@ from nvmatrixlib.widgets.table_frame import TableFrame
 import tkinter as tk
 
 
-class TableManager(ViewComponentBase, tk.Toplevel):
+class TableManager(SubController, Observer, tk.Toplevel):
 
     def __init__(self, model, view, controller, manager, **kwargs):
-        ViewComponentBase.__init__(self, model, view, controller)
+        SubController.__init__(self, model, view, controller)
         tk.Toplevel.__init__(self)
 
         self._manager = manager
