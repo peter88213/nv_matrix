@@ -4,6 +4,10 @@
 
 ## Changelog
 
+### Version 4.6.3
+
+Fix a bug where existing section plot line associations may disappear when associating plot lines to sections.
+
 ### Version 4.6.2
 
 No longer disable the "Matrix" menu entry when locking the project.

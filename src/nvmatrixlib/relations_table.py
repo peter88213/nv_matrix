@@ -297,14 +297,16 @@ class RelationsTable:
         for scId in self._plotlineNodes:
 
             # Plot lines.
-            self._novel.sections[scId].scPlotLines = []
             for plId in self._novel.plotLines:
                 plotlineSections = self._novel.plotLines[plId].sections
                 if self._plotlineNodes[scId][plId].state:
-                    self._novel.sections[scId].scPlotLines.append(plId)
+                    if not plId in self._novel.sections[scId].scPlotLines:
+                        self._novel.sections[scId].scPlotLines.append(plId)
                     if not scId in plotlineSections:
                         plotlineSections.append(scId)
                 else:
+                    if plId in self._novel.sections[scId].scPlotLines:
+                        self._novel.sections[scId].scPlotLines.remove(plId)
                     if scId in plotlineSections:
                         plotlineSections.remove(scId)
                     for ppId in list(self._novel.sections[scId].scPlotPoints):
