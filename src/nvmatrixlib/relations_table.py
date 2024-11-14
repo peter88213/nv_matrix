@@ -4,6 +4,8 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/nv_matrix
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
+from tkinter import ttk
+
 from nvlib.novx_globals import CH_ROOT
 from nvlib.novx_globals import CR_ROOT
 from nvlib.novx_globals import IT_ROOT
@@ -94,12 +96,12 @@ class RelationsTable:
 
         #--- Plot line columns.
         if self._novel.plotLines:
-            plotlineTitleWindow = tk.Frame(master.columnTitles)
+            plotlineTitleWindow = ttk.Frame(master.columnTitles)
             plotlineTitleWindow.pack(side='left', fill='both')
             tk.Label(plotlineTitleWindow, text=_('Plot lines'), bg=self._kwargs['color_arc_heading']).pack(fill='x')
-            plotlineTypeColumn = tk.Frame(master.display)
+            plotlineTypeColumn = ttk.Frame(master.display)
             plotlineTypeColumn.pack(side='left', fill='both')
-            plotlineColumn = tk.Frame(plotlineTypeColumn)
+            plotlineColumn = ttk.Frame(plotlineTypeColumn)
             plotlineColumn.pack(fill='both')
             for plId in self._novel.tree.get_children(PL_ROOT):
                 # Display plot line titles.
@@ -139,11 +141,11 @@ class RelationsTable:
 
         #--- Character columns.
         if self._novel.characters:
-            characterTypeColumn = tk.Frame(master.display)
+            characterTypeColumn = ttk.Frame(master.display)
             characterTypeColumn.pack(side='left', fill='both')
-            characterColumn = tk.Frame(characterTypeColumn)
+            characterColumn = ttk.Frame(characterTypeColumn)
             characterColumn.pack(fill='both')
-            characterTitleWindow = tk.Frame(master.columnTitles)
+            characterTitleWindow = ttk.Frame(master.columnTitles)
             characterTitleWindow.pack(side='left', fill='both')
             tk.Label(characterTitleWindow, text=_('Characters'), bg=self._kwargs['color_character_heading']).pack(fill='x')
             for crId in self._novel.tree.get_children(CR_ROOT):
@@ -184,11 +186,11 @@ class RelationsTable:
 
         #--- Location columns.
         if self._novel.locations:
-            locationTypeColumn = tk.Frame(master.display)
+            locationTypeColumn = ttk.Frame(master.display)
             locationTypeColumn.pack(side='left', fill='both')
-            locationColumn = tk.Frame(locationTypeColumn)
+            locationColumn = ttk.Frame(locationTypeColumn)
             locationColumn.pack(fill='both')
-            locationTitleWindow = tk.Frame(master.columnTitles)
+            locationTitleWindow = ttk.Frame(master.columnTitles)
             locationTitleWindow.pack(side='left', fill='both')
             tk.Label(locationTitleWindow, text=_('Locations'), bg=self._kwargs['color_location_heading']).pack(fill='x')
             for lcId in self._novel.tree.get_children(LC_ROOT):
@@ -229,11 +231,11 @@ class RelationsTable:
 
         #--- Item columns.
         if self._novel.items:
-            itemTypeColumn = tk.Frame(master.display)
+            itemTypeColumn = ttk.Frame(master.display)
             itemTypeColumn.pack(side='left', fill='both')
-            itemColumn = tk.Frame(itemTypeColumn)
+            itemColumn = ttk.Frame(itemTypeColumn)
             itemColumn.pack(fill='both')
-            itemTitleWindow = tk.Frame(master.columnTitles)
+            itemTitleWindow = ttk.Frame(master.columnTitles)
             itemTitleWindow.pack(side='left', fill='both')
             tk.Label(itemTitleWindow, text=_('Items'), bg=self._kwargs['color_item_heading']).pack(fill='x')
             for itId in self._novel.tree.get_children(IT_ROOT):
