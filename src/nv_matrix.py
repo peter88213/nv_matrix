@@ -32,7 +32,7 @@ class Plugin(PluginBase):
     API_VERSION = '5.0'
     DESCRIPTION = 'A section relationship table'
     URL = 'https://github.com/peter88213/nv_matrix'
-    _HELP_URL = f'https://peter88213.github.io/{_("nvhelp-en")}/nv_matrix/'
+    _HELP_URL = f'{_("https://peter88213.github.io/nvhelp-en")}/nv_matrix/'
 
     FEATURE = _('Matrix')
     INI_FILENAME = 'matrix.ini'
