@@ -18,11 +18,14 @@ from nvmatrixlib.widgets.table_frame import TableFrame
 import tkinter as tk
 
 
-class TableManager(SubController, Observer, tk.Toplevel):
+class MatrixWindow(tk.Toplevel, Observer, SubController):
 
     def __init__(self, model, view, controller, manager, **kwargs):
-        SubController.__init__(self, model, view, controller)
-        tk.Toplevel.__init__(self)
+        super().__init__()
+
+        self._mdl = model
+        self._ui = view
+        self._ctrl = controller
 
         self._manager = manager
         self._kwargs = kwargs

@@ -21,8 +21,8 @@ import webbrowser
 
 from mvclib.view.set_icon_tk import set_icon
 from nvlib.plugin.plugin_base import PluginBase
+from nvmatrixlib.matrix_window import MatrixWindow
 from nvmatrixlib.nvmatrix_globals import _
-from nvmatrixlib.table_manager import TableManager
 import tkinter as tk
 
 
@@ -206,7 +206,7 @@ class Plugin(PluginBase):
                 self._matrixViewer.focus()
                 return
 
-        self._matrixViewer = TableManager(self._mdl, self._ui, self._ctrl, self, **self.kwargs)
+        self._matrixViewer = MatrixWindow(self._mdl, self._ui, self._ctrl, self, **self.kwargs)
         self._matrixViewer.title(f'{self._mdl.novel.title} - {self.FEATURE}')
         set_icon(self._matrixViewer, icon='mLogo32', default=False)
 
