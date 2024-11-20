@@ -4,6 +4,14 @@
 
 ## Changelog
 
+### Version 5.0.0
+
+Library update:
+- Refactor the code for better maintainability.
+
+API: 5.0
+Based on novelibre 5.0.0
+
 ### Version 4.6.1
 
 - Fix a bug where the project lock has no effect on user operation.

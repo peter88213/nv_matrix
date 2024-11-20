@@ -3,8 +3,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 4.6.1\n"
-"POT-Creation-Date: 2024-10-31 20:22:53\n"
+"Project-Id-Version: 5.0.0\n"
+"POT-Creation-Date: 2024-11-20 14:36:40\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -41,5 +41,5 @@ msgstr ""
 msgid "Sections"
 msgstr ""
 
-msgid "nvhelp-en"
+msgid "https://peter88213.github.io/nvhelp-en"
 msgstr ""

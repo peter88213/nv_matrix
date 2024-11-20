@@ -20,7 +20,7 @@ from tkinter import ttk
 import webbrowser
 
 from mvclib.view.set_icon_tk import set_icon
-from nvlib.plugin.plugin_base import PluginBase
+from nvlib.controller.plugin.plugin_base import PluginBase
 from nvmatrixlib.matrix_window import MatrixWindow
 from nvmatrixlib.nvmatrix_globals import _
 import tkinter as tk
