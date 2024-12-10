@@ -87,7 +87,7 @@ class Plugin(PluginBase):
         self.kwargs.update(self.configuration.options)
 
         # Create an entry to the Tools menu.
-        self._ui.toolsMenu.add_command(label=self.FEATURE, command=self._start_viewer)
+        self._ui.toolsMenu.add_command(label=self.FEATURE, command=self.start_viewer)
         self._ui.toolsMenu.entryconfig(self.FEATURE, state='disabled')
 
         # Add an entry to the Help menu.
@@ -178,7 +178,7 @@ class Plugin(PluginBase):
             self._ui.toolbar.buttonBar,
             text=_('Matrix'),
             image=matrixIcon,
-            command=self._start_viewer
+            command=self.start_viewer
             )
         self._matrixButton.pack(side='left')
         self._matrixButton.image = matrixIcon
@@ -194,7 +194,7 @@ class Plugin(PluginBase):
 
         Hovertip(self._matrixButton, self._matrixButton['text'])
 
-    def _start_viewer(self):
+    def start_viewer(self):
         if not self._mdl.prjFile:
             return
 
