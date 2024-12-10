@@ -8,31 +8,25 @@ from tkinter import ttk
 
 from mvclib.controller.sub_controller import SubController
 from mvclib.view.observer import Observer
-from nvmatrixlib.node import Node
-from nvmatrixlib.nvmatrix_globals import _
-from nvmatrixlib.platform.platform_settings import KEYS
-from nvmatrixlib.platform.platform_settings import MOUSE
-from nvmatrixlib.platform.platform_settings import PLATFORM
-from nvmatrixlib.relations_table import RelationsTable
-from nvmatrixlib.widgets.table_frame import TableFrame
+from nvmatrix.node import Node
+from nvmatrix.nvmatrix_locale import _
+from nvmatrix.platform.platform_settings import KEYS
+from nvmatrix.platform.platform_settings import MOUSE
+from nvmatrix.platform.platform_settings import PLATFORM
+from nvmatrix.relations_table import RelationsTable
+from nvmatrix.widgets.table_frame import TableFrame
 import tkinter as tk
 
 
-class MatrixWindow(tk.Toplevel, Observer, SubController):
+class MatrixView(tk.Toplevel, Observer, SubController):
 
-    def __init__(self, model, view, controller, manager, **kwargs):
-        super().__init__()
+    def __init__(self, model, view, controller, prefs):
+        tk.Toplevel.__init__(self)
 
-        self._mdl = model
-        self._ui = view
-        self._ctrl = controller
+        SubController.initialize_controller(self, model, view, controller)
+        self.prefs = prefs
 
-        self._manager = manager
-        self._kwargs = kwargs
-
-        self._statusText = ''
-
-        self.geometry(kwargs['window_geometry'])
+        self.geometry(self.prefs['window_geometry'])
         self.lift()
         self.focus()
 
@@ -57,7 +51,7 @@ class MatrixWindow(tk.Toplevel, Observer, SubController):
 
         #--- The Relations Table.
         if self._mdl.novel is not None:
-            self._relationsTable = RelationsTable(self.tableFrame, self._mdl.novel, **self._kwargs)
+            self._relationsTable = RelationsTable(self.tableFrame, self._mdl.novel, self.prefs)
             self._relationsTable.set_nodes()
         self.isOpen = True
         self.tableFrame.pack(fill='both', expand=True, padx=2, pady=2)
@@ -81,7 +75,7 @@ class MatrixWindow(tk.Toplevel, Observer, SubController):
 
     def on_quit(self, event=None):
         self.isOpen = False
-        self._manager.kwargs['window_geometry'] = self.winfo_geometry()
+        self.prefs['window_geometry'] = self.winfo_geometry()
         self.tableFrame.destroy()
         # this is necessary for deleting the event bindings
         self._mdl.delete_observer(self)
@@ -89,14 +83,18 @@ class MatrixWindow(tk.Toplevel, Observer, SubController):
 
     def refresh(self):
         """Refresh the view after changes have been made "outsides"."""
-        if self.isOpen:
-            if not self._skipUpdate:
-                self.tableFrame.pack_forget()
-                self.tableFrame.destroy()
-                self.tableFrame = TableFrame(self.mainWindow)
-                self.tableFrame.pack(fill='both', expand=True, padx=2, pady=2)
-                self._relationsTable.draw_matrix(self.tableFrame)
-                self._relationsTable.set_nodes()
+        if not self.isOpen:
+            return
+
+        if self._skipUpdate:
+            return
+
+        self.tableFrame.pack_forget()
+        self.tableFrame.destroy()
+        self.tableFrame = TableFrame(self.mainWindow)
+        self.tableFrame.pack(fill='both', expand=True, padx=2, pady=2)
+        self._relationsTable.draw_matrix(self.tableFrame)
+        self._relationsTable.set_nodes()
 
     def unlock(self):
         """Enable element change."""

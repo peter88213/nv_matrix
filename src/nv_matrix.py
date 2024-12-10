@@ -21,8 +21,8 @@ import webbrowser
 
 from mvclib.view.set_icon_tk import set_icon
 from nvlib.controller.plugin.plugin_base import PluginBase
-from nvmatrixlib.matrix_window import MatrixWindow
-from nvmatrixlib.nvmatrix_globals import _
+from nvmatrix.matrix_view import MatrixView
+from nvmatrix.nvmatrix_locale import _
 import tkinter as tk
 
 
@@ -82,9 +82,9 @@ class Plugin(PluginBase):
             options=self.OPTIONS
             )
         self.configuration.read(self.iniFile)
-        self.kwargs = {}
-        self.kwargs.update(self.configuration.settings)
-        self.kwargs.update(self.configuration.options)
+        self.prefs = {}
+        self.prefs.update(self.configuration.settings)
+        self.prefs.update(self.configuration.options)
 
         # Create an entry to the Tools menu.
         self._ui.toolsMenu.add_command(label=self.FEATURE, command=self.start_viewer)
@@ -137,11 +137,11 @@ class Plugin(PluginBase):
                 self._matrixViewer.on_quit()
 
         #--- Save configuration
-        for keyword in self.kwargs:
+        for keyword in self.prefs:
             if keyword in self.configuration.options:
-                self.configuration.options[keyword] = self.kwargs[keyword]
+                self.configuration.options[keyword] = self.prefs[keyword]
             elif keyword in self.configuration.settings:
-                self.configuration.settings[keyword] = self.kwargs[keyword]
+                self.configuration.settings[keyword] = self.prefs[keyword]
         self.configuration.write(self.iniFile)
 
     def unlock(self):
@@ -206,7 +206,7 @@ class Plugin(PluginBase):
                 self._matrixViewer.focus()
                 return
 
-        self._matrixViewer = MatrixWindow(self._mdl, self._ui, self._ctrl, self, **self.kwargs)
+        self._matrixViewer = MatrixView(self._mdl, self._ui, self._ctrl, self.prefs)
         self._matrixViewer.title(f'{self._mdl.novel.title} - {self.FEATURE}')
         set_icon(self._matrixViewer, icon='mLogo32', default=False)
 

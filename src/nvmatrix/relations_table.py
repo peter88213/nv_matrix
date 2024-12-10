@@ -11,8 +11,8 @@ from nvlib.novx_globals import CR_ROOT
 from nvlib.novx_globals import IT_ROOT
 from nvlib.novx_globals import LC_ROOT
 from nvlib.novx_globals import PL_ROOT
-from nvmatrixlib.node import Node
-from nvmatrixlib.nvmatrix_globals import _
+from nvmatrix.node import Node
+from nvmatrix.nvmatrix_locale import _
 import tkinter as tk
 
 
@@ -25,7 +25,7 @@ class RelationsTable:
     {section ID: {element Id: node}}
     """
 
-    def __init__(self, master, novel, **kwargs):
+    def __init__(self, master, novel, prefs):
         """Draw the matrix with blank nodes.
         
         Positional arguments:
@@ -33,7 +33,7 @@ class RelationsTable:
             
         """
         self._novel = novel
-        self._kwargs = kwargs
+        self._prefs = prefs
         self.draw_matrix(master)
 
     def draw_matrix(self, master):
@@ -49,8 +49,8 @@ class RelationsTable:
                 text = f' {text} '
             return text
 
-        colorsBackground = ((self._kwargs['color_bg_00'], self._kwargs['color_bg_01']),
-                            (self._kwargs['color_bg_10'], self._kwargs['color_bg_11']))
+        colorsBackground = ((self._prefs['color_bg_00'], self._prefs['color_bg_01']),
+                            (self._prefs['color_bg_10'], self._prefs['color_bg_11']))
         columns = []
         col = 0
         bgc = col % 2
@@ -98,7 +98,7 @@ class RelationsTable:
         if self._novel.plotLines:
             plotlineTitleWindow = ttk.Frame(master.columnTitles)
             plotlineTitleWindow.pack(side='left', fill='both')
-            tk.Label(plotlineTitleWindow, text=_('Plot lines'), bg=self._kwargs['color_arc_heading']).pack(fill='x')
+            tk.Label(plotlineTitleWindow, text=_('Plot lines'), bg=self._prefs['color_arc_heading']).pack(fill='x')
             plotlineTypeColumn = ttk.Frame(master.display)
             plotlineTypeColumn.pack(side='left', fill='both')
             plotlineColumn = ttk.Frame(plotlineTypeColumn)
@@ -124,7 +124,7 @@ class RelationsTable:
                     bgr = row % 2
                     node = Node(columns[col],
                          colorFalse=colorsBackground[bgr][bgc],
-                         colorTrue=self._kwargs['color_arc_node']
+                         colorTrue=self._prefs['color_arc_node']
                          )
                     node.pack(fill='x', expand=True)
                     self._plotlineNodes[scId][plId] = node
@@ -137,7 +137,7 @@ class RelationsTable:
                          anchor='w'
                          ).pack(fill='x', expand=True)
                 col += 1
-            tk.Label(plotlineTypeColumn, text=_('Plot lines'), bg=self._kwargs['color_arc_heading']).pack(fill='x')
+            tk.Label(plotlineTypeColumn, text=_('Plot lines'), bg=self._prefs['color_arc_heading']).pack(fill='x')
 
         #--- Character columns.
         if self._novel.characters:
@@ -147,7 +147,7 @@ class RelationsTable:
             characterColumn.pack(fill='both')
             characterTitleWindow = ttk.Frame(master.columnTitles)
             characterTitleWindow.pack(side='left', fill='both')
-            tk.Label(characterTitleWindow, text=_('Characters'), bg=self._kwargs['color_character_heading']).pack(fill='x')
+            tk.Label(characterTitleWindow, text=_('Characters'), bg=self._prefs['color_character_heading']).pack(fill='x')
             for crId in self._novel.tree.get_children(CR_ROOT):
                 # Display character titles.
                 row = 1
@@ -169,7 +169,7 @@ class RelationsTable:
                     bgr = row % 2
                     node = Node(columns[col],
                          colorFalse=colorsBackground[bgr][bgc],
-                         colorTrue=self._kwargs['color_character_node']
+                         colorTrue=self._prefs['color_character_node']
                          )
                     node.pack(fill='x', expand=True)
                     self._characterNodes[scId][crId] = node
@@ -182,7 +182,7 @@ class RelationsTable:
                          anchor='w'
                          ).pack(fill='x', expand=True)
                 col += 1
-            tk.Label(characterTypeColumn, text=_('Characters'), bg=self._kwargs['color_character_heading']).pack(fill='x')
+            tk.Label(characterTypeColumn, text=_('Characters'), bg=self._prefs['color_character_heading']).pack(fill='x')
 
         #--- Location columns.
         if self._novel.locations:
@@ -192,7 +192,7 @@ class RelationsTable:
             locationColumn.pack(fill='both')
             locationTitleWindow = ttk.Frame(master.columnTitles)
             locationTitleWindow.pack(side='left', fill='both')
-            tk.Label(locationTitleWindow, text=_('Locations'), bg=self._kwargs['color_location_heading']).pack(fill='x')
+            tk.Label(locationTitleWindow, text=_('Locations'), bg=self._prefs['color_location_heading']).pack(fill='x')
             for lcId in self._novel.tree.get_children(LC_ROOT):
                 # Display location titles.
                 row = 1
@@ -214,7 +214,7 @@ class RelationsTable:
                     bgr = row % 2
                     node = Node(columns[col],
                          colorFalse=colorsBackground[bgr][bgc],
-                         colorTrue=self._kwargs['color_location_node']
+                         colorTrue=self._prefs['color_location_node']
                          )
                     node.pack(fill='x', expand=True)
                     self._locationNodes[scId][lcId] = node
@@ -227,7 +227,7 @@ class RelationsTable:
                          anchor='w'
                          ).pack(fill='x', expand=True)
                 col += 1
-            tk.Label(locationTypeColumn, text=_('Locations'), bg=self._kwargs['color_location_heading']).pack(fill='x')
+            tk.Label(locationTypeColumn, text=_('Locations'), bg=self._prefs['color_location_heading']).pack(fill='x')
 
         #--- Item columns.
         if self._novel.items:
@@ -237,7 +237,7 @@ class RelationsTable:
             itemColumn.pack(fill='both')
             itemTitleWindow = ttk.Frame(master.columnTitles)
             itemTitleWindow.pack(side='left', fill='both')
-            tk.Label(itemTitleWindow, text=_('Items'), bg=self._kwargs['color_item_heading']).pack(fill='x')
+            tk.Label(itemTitleWindow, text=_('Items'), bg=self._prefs['color_item_heading']).pack(fill='x')
             for itId in self._novel.tree.get_children(IT_ROOT):
                 # Display item titles.
                 row = 1
@@ -259,7 +259,7 @@ class RelationsTable:
                     bgr = row % 2
                     node = Node(columns[col],
                          colorFalse=colorsBackground[bgr][bgc],
-                         colorTrue=self._kwargs['color_item_node']
+                         colorTrue=self._prefs['color_item_node']
                          )
                     node.pack(fill='x', expand=True)
                     self._itemNodes[scId][itId] = node
@@ -272,7 +272,7 @@ class RelationsTable:
                          anchor='w'
                          ).pack(fill='x', expand=True)
                 col += 1
-            tk.Label(itemTypeColumn, text=_('Items'), bg=self._kwargs['color_item_heading']).pack(fill='x')
+            tk.Label(itemTypeColumn, text=_('Items'), bg=self._prefs['color_item_heading']).pack(fill='x')
 
     def set_nodes(self):
         """Loop through all nodes, setting states."""

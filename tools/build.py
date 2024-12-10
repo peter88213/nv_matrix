@@ -19,7 +19,7 @@ VERSION = '5.0.1'
 class PluginBuilder(PackageBuilder):
 
     PRJ_NAME = 'nv_matrix'
-    LOCAL_LIB = 'nvmatrixlib'
+    LOCAL_LIB = 'nvmatrix'
     GERMAN_TRANSLATION = True
 
     def add_extras(self):
