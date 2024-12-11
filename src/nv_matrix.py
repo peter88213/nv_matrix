@@ -32,7 +32,7 @@ class Plugin(PluginBase):
     API_VERSION = '5.0'
     DESCRIPTION = 'A section relationship table'
     URL = 'https://github.com/peter88213/nv_matrix'
-    _HELP_URL = f'{_("https://peter88213.github.io/nvhelp-en")}/nv_matrix/'
+    HELP_URL = f'{_("https://peter88213.github.io/nvhelp-en")}/nv_matrix/'
 
     FEATURE = _('Matrix')
     INI_FILENAME = 'matrix.ini'
@@ -91,7 +91,7 @@ class Plugin(PluginBase):
         self._ui.toolsMenu.entryconfig(self.FEATURE, state='disabled')
 
         # Add an entry to the Help menu.
-        self._ui.helpMenu.add_command(label=_('Matrix plugin Online help'), command=lambda: webbrowser.open(self._HELP_URL))
+        self._ui.helpMenu.add_command(label=_('Matrix plugin Online help'), command=self.open_help_page)
 
         #--- Configure the toolbar.
         self._configure_toolbar()
@@ -143,6 +143,9 @@ class Plugin(PluginBase):
             elif keyword in self.configuration.settings:
                 self.configuration.settings[keyword] = self.prefs[keyword]
         self.configuration.write(self.iniFile)
+
+    def open_help_page(self):
+        webbrowser.open(self.HELP_URL)
 
     def unlock(self):
         """Enable changes on the model.
