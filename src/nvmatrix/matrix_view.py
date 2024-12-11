@@ -6,9 +6,8 @@ License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 from tkinter import ttk
 
-from mvclib.controller.sub_controller import SubController
+from nvmatrix.matrix_view_ctrl import MatrixViewCtrl
 from mvclib.view.observer import Observer
-from nvmatrix.node import Node
 from nvmatrix.nvmatrix_locale import _
 from nvmatrix.platform.platform_settings import KEYS
 from nvmatrix.platform.platform_settings import MOUSE
@@ -18,13 +17,12 @@ from nvmatrix.widgets.table_frame import TableFrame
 import tkinter as tk
 
 
-class MatrixView(tk.Toplevel, Observer, SubController):
+class MatrixView(tk.Toplevel, Observer, MatrixViewCtrl):
 
     def __init__(self, model, view, controller, prefs):
         tk.Toplevel.__init__(self)
 
-        SubController.initialize_controller(self, model, view, controller)
-        self.prefs = prefs
+        MatrixViewCtrl.initialize_controller(self, model, view, controller, prefs)
 
         self.geometry(self.prefs['window_geometry'])
         self.lift()
@@ -32,8 +30,6 @@ class MatrixView(tk.Toplevel, Observer, SubController):
 
         #--- Register this view component.
         self._mdl.add_observer(self)
-        if self._ctrl.isLocked:
-            self.lock()
 
         #--- Event bindings.
         if PLATFORM != 'win':
@@ -53,7 +49,6 @@ class MatrixView(tk.Toplevel, Observer, SubController):
         if self._mdl.novel is not None:
             self._relationsTable = RelationsTable(self.tableFrame, self._mdl.novel, self.prefs)
             self._relationsTable.set_nodes()
-        self.isOpen = True
         self.tableFrame.pack(fill='both', expand=True, padx=2, pady=2)
 
         #--- Initialize the view update mechanism.
@@ -62,24 +57,6 @@ class MatrixView(tk.Toplevel, Observer, SubController):
 
         # "Close" button.
         ttk.Button(self, text=_('Close'), command=self.on_quit).pack(side='right', padx=5, pady=5)
-
-    def lock(self):
-        """Inhibit element change."""
-        Node.isLocked = True
-
-    def on_element_change(self, event=None):
-        """Update the model, but not the view."""
-        self._skipUpdate = True
-        self._relationsTable.get_nodes()
-        self._skipUpdate = False
-
-    def on_quit(self, event=None):
-        self.isOpen = False
-        self.prefs['window_geometry'] = self.winfo_geometry()
-        self.tableFrame.destroy()
-        # this is necessary for deleting the event bindings
-        self._mdl.delete_observer(self)
-        self.destroy()
 
     def refresh(self):
         """Refresh the view after changes have been made "outsides"."""
@@ -95,8 +72,4 @@ class MatrixView(tk.Toplevel, Observer, SubController):
         self.tableFrame.pack(fill='both', expand=True, padx=2, pady=2)
         self._relationsTable.draw_matrix(self.tableFrame)
         self._relationsTable.set_nodes()
-
-    def unlock(self):
-        """Enable element change."""
-        Node.isLocked = False
 
