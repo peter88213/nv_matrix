@@ -98,7 +98,7 @@ class RelationsTable:
         if self._novel.plotLines:
             plotlineTitleWindow = ttk.Frame(master.columnTitles)
             plotlineTitleWindow.pack(side='left', fill='both')
-            tk.Label(plotlineTitleWindow, text=_('Plot lines'), bg=self._prefs['color_arc_heading']).pack(fill='x')
+            tk.Label(plotlineTitleWindow, text=_('Plot lines'), bg=self._prefs['color_plotline_heading']).pack(fill='x')
             plotlineTypeColumn = ttk.Frame(master.display)
             plotlineTypeColumn.pack(side='left', fill='both')
             plotlineColumn = ttk.Frame(plotlineTypeColumn)
@@ -124,7 +124,7 @@ class RelationsTable:
                     bgr = row % 2
                     node = Node(columns[col],
                          colorFalse=colorsBackground[bgr][bgc],
-                         colorTrue=self._prefs['color_arc_node']
+                         colorTrue=self._prefs['color_plotline_node']
                          )
                     node.pack(fill='x', expand=True)
                     self._plotlineNodes[scId][plId] = node
@@ -137,7 +137,7 @@ class RelationsTable:
                          anchor='w'
                          ).pack(fill='x', expand=True)
                 col += 1
-            tk.Label(plotlineTypeColumn, text=_('Plot lines'), bg=self._prefs['color_arc_heading']).pack(fill='x')
+            tk.Label(plotlineTypeColumn, text=_('Plot lines'), bg=self._prefs['color_plotline_heading']).pack(fill='x')
 
         #--- Character columns.
         if self._novel.characters:
