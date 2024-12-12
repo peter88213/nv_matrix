@@ -19,9 +19,8 @@ from pathlib import Path
 from tkinter import ttk
 import webbrowser
 
-from mvclib.view.set_icon_tk import set_icon
 from nvlib.controller.plugin.plugin_base import PluginBase
-from nvmatrix.matrix_view import MatrixView
+from nvmatrix.matrix_service import MatrixService
 from nvmatrix.nvmatrix_locale import _
 import tkinter as tk
 
@@ -35,24 +34,6 @@ class Plugin(PluginBase):
     HELP_URL = f'{_("https://peter88213.github.io/nvhelp-en")}/nv_matrix/'
 
     FEATURE = _('Matrix')
-    INI_FILENAME = 'matrix.ini'
-    INI_FILEPATH = '.novx/config'
-    SETTINGS = dict(
-        window_geometry='600x800',
-        color_bg_00='gray80',
-        color_bg_01='gray85',
-        color_bg_10='gray95',
-        color_bg_11='white',
-        color_arc_heading='deepSkyBlue',
-        color_arc_node='deepSkyBlue3',
-        color_character_heading='goldenrod1',
-        color_character_node='goldenrod3',
-        color_location_heading='coral1',
-        color_location_node='coral3',
-        color_item_heading='aquamarine1',
-        color_item_node='aquamarine3',
-    )
-    OPTIONS = {}
 
     def install(self, model, view, controller):
         """Add a submenu to the 'Tools' menu.
@@ -62,29 +43,10 @@ class Plugin(PluginBase):
             view -- Reference to the main view instance of the application.
             controller -- Reference to the main controller instance of the application.
 
-        Optional arguments:
-            prefs -- deprecated. Please use controller.get_preferences() instead.
-        
         Extends the superclass method.
         """
         super().install(model, view, controller)
-        self._matrixViewer = None
-
-        #--- Load configuration.
-        try:
-            homeDir = str(Path.home()).replace('\\', '/')
-            configDir = f'{homeDir}/{self.INI_FILEPATH}'
-        except:
-            configDir = '.'
-        self.iniFile = f'{configDir}/{self.INI_FILENAME}'
-        self.configuration = self._mdl.nvService.new_configuration(
-            settings=self.SETTINGS,
-            options=self.OPTIONS
-            )
-        self.configuration.read(self.iniFile)
-        self.prefs = {}
-        self.prefs.update(self.configuration.settings)
-        self.prefs.update(self.configuration.options)
+        self.matrixService = MatrixService(model, view, controller)
 
         # Create an entry to the Tools menu.
         self._ui.toolsMenu.add_command(label=self.FEATURE, command=self.start_viewer)
@@ -117,43 +79,34 @@ class Plugin(PluginBase):
         
         Overrides the superclass method.
         """
-        if self._matrixViewer:
-            self._matrixViewer.lock()
+        self.matrixService.lock()
 
     def on_close(self):
         """Apply changes and close the window.
         
         Overrides the superclass method.
         """
-        self.on_quit()
+        self.matrixService.on_close()
 
     def on_quit(self):
         """Actions to be performed when novelibre is closed.
         
         Overrides the superclass method.
         """
-        if self._matrixViewer:
-            if self._matrixViewer.isOpen:
-                self._matrixViewer.on_quit()
-
-        #--- Save configuration
-        for keyword in self.prefs:
-            if keyword in self.configuration.options:
-                self.configuration.options[keyword] = self.prefs[keyword]
-            elif keyword in self.configuration.settings:
-                self.configuration.settings[keyword] = self.prefs[keyword]
-        self.configuration.write(self.iniFile)
+        self.matrixService.on_quit()
 
     def open_help_page(self):
         webbrowser.open(self.HELP_URL)
+
+    def start_viewer(self):
+        self.matrixService.start_viewer(self.FEATURE)
 
     def unlock(self):
         """Enable changes on the model.
         
         Overrides the superclass method.
         """
-        if self._matrixViewer:
-            self._matrixViewer.unlock()
+        self.matrixService.unlock()
 
     def _configure_toolbar(self):
 
@@ -196,20 +149,4 @@ class Plugin(PluginBase):
             return
 
         Hovertip(self._matrixButton, self._matrixButton['text'])
-
-    def start_viewer(self):
-        if not self._mdl.prjFile:
-            return
-
-        if self._matrixViewer:
-            if self._matrixViewer.isOpen:
-                if self._matrixViewer.state() == 'iconic':
-                    self._matrixViewer.state('normal')
-                self._matrixViewer.lift()
-                self._matrixViewer.focus()
-                return
-
-        self._matrixViewer = MatrixView(self._mdl, self._ui, self._ctrl, self.prefs)
-        self._matrixViewer.title(f'{self._mdl.novel.title} - {self.FEATURE}')
-        set_icon(self._matrixViewer, icon='mLogo32', default=False)
 
