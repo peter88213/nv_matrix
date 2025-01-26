@@ -30,7 +30,7 @@ class MatrixViewCtrl(SubController):
     def on_quit(self, event=None):
         self.isOpen = False
         self.prefs['window_geometry'] = self.winfo_geometry()
-        self.tableFrame.destroy()
+        self.tree.destroy()
         # this is necessary for deleting the event bindings
         self._mdl.delete_observer(self)
         self.destroy()
