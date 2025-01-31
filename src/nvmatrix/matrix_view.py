@@ -6,8 +6,8 @@ License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 from tkinter import ttk
 
+from nvlib.gui.observer import Observer
 from nvmatrix.matrix_view_ctrl import MatrixViewCtrl
-from mvclib.view.observer import Observer
 from nvmatrix.nvmatrix_locale import _
 from nvmatrix.platform.platform_settings import KEYS
 from nvmatrix.platform.platform_settings import MOUSE
