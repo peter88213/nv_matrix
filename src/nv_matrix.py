@@ -19,9 +19,9 @@ from pathlib import Path
 from tkinter import ttk
 import webbrowser
 
+from nvmatrix.nvmatrix_locale import _
 from nvlib.controller.plugin.plugin_base import PluginBase
 from nvmatrix.matrix_service import MatrixService
-from nvmatrix.nvmatrix_locale import _
 import tkinter as tk
 
 
