@@ -39,12 +39,10 @@ class RelationsTable:
     def draw_matrix(self, master):
 
         def fill_str(text):
-            """Return a string that is at least 7 characters long.
-            
-            Extend text with spaces so that it does not fall 
-            below the length of 7 characters.
-            This is for column titles, to widen narrow columns.
-            """
+            # Return a string that is at least 7 characters long.
+            # Extend text with spaces so that it does not fall
+            # below the length of 7 characters.
+            # This is for column titles, to widen narrow columns.
             while len(text) < 7:
                 text = f' {text} '
             return text
