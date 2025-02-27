@@ -4,6 +4,13 @@
 
 ## Changelog
 
+### Version 5.0.6
+
+- Refactored the code for better maintainability.
+
+API: 5.0
+Based on novelibre 5.16.1
+
 ### Version 5.0.5
 
 - Changed the wording in SETTINGS.
