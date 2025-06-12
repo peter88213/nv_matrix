@@ -76,21 +76,24 @@ class RelationsTable:
                     self._itemNodes[scId] = {}
                     self._plotlineNodes[scId] = {}
 
-                    tk.Label(master.rowTitles,
-                             text=self._novel.sections[scId].title,
-                             bg=colorsBackground[bgr][1],
-                             justify='left',
-                             anchor='w'
-                             ).pack(fill='x')
+                    tk.Label(
+                        master.rowTitles,
+                        text=self._novel.sections[scId].title,
+                        bg=colorsBackground[bgr][1],
+                        justify='left',
+                        anchor='w',
+                    ).pack(fill='x')
                     row += 1
         bgr = row % 2
-        tk.Label(master.rowTitles,
-                         text=' ',
-                         bg=colorsBackground[bgr][1],
-                         ).pack(fill='x')
-        tk.Label(master.rowTitles,
-                         text=_('Sections'),
-                         ).pack(fill='x')
+        tk.Label(
+            master.rowTitles,
+            text=' ',
+            bg=colorsBackground[bgr][1],
+        ).pack(fill='x')
+        tk.Label(
+            master.rowTitles,
+            text=_('Sections'),
+        ).pack(fill='x')
 
         #--- Plot line columns.
         if self._novel.plotLines:
@@ -107,12 +110,13 @@ class RelationsTable:
                 bgr = row % 2
                 bgc = col % 2
                 plotlineTitle = fill_str(self._novel.plotLines[plId].shortName)
-                tk.Label(plotlineTitleWindow,
-                         text=plotlineTitle,
-                         bg=colorsBackground[bgr][bgc],
-                         justify='left',
-                         anchor='w'
-                         ).pack(side='left', fill='x', expand=True)
+                tk.Label(
+                    plotlineTitleWindow,
+                    text=plotlineTitle,
+                    bg=colorsBackground[bgr][bgc],
+                    justify='left',
+                    anchor='w',
+                ).pack(side='left', fill='x', expand=True)
                 row += 1
 
                 # Display plot line nodes.
@@ -128,12 +132,13 @@ class RelationsTable:
                     self._plotlineNodes[scId][plId] = node
                     row += 1
                 bgr = row % 2
-                tk.Label(columns[col],
-                         text=plotlineTitle,
-                         bg=colorsBackground[bgr][bgc],
-                         justify='left',
-                         anchor='w'
-                         ).pack(fill='x', expand=True)
+                tk.Label(
+                    columns[col],
+                    text=plotlineTitle,
+                    bg=colorsBackground[bgr][bgc],
+                    justify='left',
+                    anchor='w'
+                ).pack(fill='x', expand=True)
                 col += 1
             tk.Label(plotlineTypeColumn, text=_('Plot lines'), bg=self._prefs['color_plotline_heading']).pack(fill='x')
 
@@ -152,12 +157,13 @@ class RelationsTable:
                 bgr = row % 2
                 bgc = col % 2
                 characterTitle = fill_str(self._novel.characters[crId].title)
-                tk.Label(characterTitleWindow,
-                         text=characterTitle,
-                         bg=colorsBackground[bgr][bgc],
-                         justify='left',
-                         anchor='w'
-                         ).pack(side='left', fill='x', expand=True)
+                tk.Label(
+                    characterTitleWindow,
+                    text=characterTitle,
+                    bg=colorsBackground[bgr][bgc],
+                    justify='left',
+                    anchor='w',
+                ).pack(side='left', fill='x', expand=True)
                 row += 1
 
                 # Display character nodes.
@@ -173,12 +179,13 @@ class RelationsTable:
                     self._characterNodes[scId][crId] = node
                     row += 1
                 bgr = row % 2
-                tk.Label(columns[col],
-                         text=characterTitle,
-                         bg=colorsBackground[bgr][bgc],
-                         justify='left',
-                         anchor='w'
-                         ).pack(fill='x', expand=True)
+                tk.Label(
+                    columns[col],
+                    text=characterTitle,
+                    bg=colorsBackground[bgr][bgc],
+                    justify='left',
+                    anchor='w',
+                ).pack(fill='x', expand=True)
                 col += 1
             tk.Label(characterTypeColumn, text=_('Characters'), bg=self._prefs['color_character_heading']).pack(fill='x')
 
@@ -197,12 +204,13 @@ class RelationsTable:
                 bgr = row % 2
                 bgc = col % 2
                 locationTitle = fill_str(self._novel.locations[lcId].title)
-                tk.Label(locationTitleWindow,
-                         text=locationTitle,
-                         bg=colorsBackground[bgr][bgc],
-                         justify='left',
-                         anchor='w'
-                         ).pack(side='left', fill='x', expand=True)
+                tk.Label(
+                    locationTitleWindow,
+                    text=locationTitle,
+                    bg=colorsBackground[bgr][bgc],
+                    justify='left',
+                    anchor='w',
+                ).pack(side='left', fill='x', expand=True)
                 row += 1
 
                 # Display location nodes.
@@ -218,12 +226,13 @@ class RelationsTable:
                     self._locationNodes[scId][lcId] = node
                     row += 1
                 bgr = row % 2
-                tk.Label(columns[col],
-                         text=locationTitle,
-                         bg=colorsBackground[bgr][bgc],
-                         justify='left',
-                         anchor='w'
-                         ).pack(fill='x', expand=True)
+                tk.Label(
+                    columns[col],
+                    text=locationTitle,
+                    bg=colorsBackground[bgr][bgc],
+                    justify='left',
+                    anchor='w',
+                ).pack(fill='x', expand=True)
                 col += 1
             tk.Label(locationTypeColumn, text=_('Locations'), bg=self._prefs['color_location_heading']).pack(fill='x')
 
@@ -242,12 +251,13 @@ class RelationsTable:
                 bgr = row % 2
                 bgc = col % 2
                 itemTitle = fill_str(self._novel.items[itId].title)
-                tk.Label(itemTitleWindow,
-                         text=itemTitle,
-                         bg=colorsBackground[bgr][bgc],
-                         justify='left',
-                         anchor='w'
-                         ).pack(side='left', fill='x', expand=True)
+                tk.Label(
+                    itemTitleWindow,
+                    text=itemTitle,
+                    bg=colorsBackground[bgr][bgc],
+                    justify='left',
+                    anchor='w',
+                ).pack(side='left', fill='x', expand=True)
                 row += 1
 
                 # Display item nodes.
@@ -257,18 +267,19 @@ class RelationsTable:
                     bgr = row % 2
                     node = Node(columns[col],
                          colorFalse=colorsBackground[bgr][bgc],
-                         colorTrue=self._prefs['color_item_node']
-                         )
+                         colorTrue=self._prefs['color_item_node'],
+                    )
                     node.pack(fill='x', expand=True)
                     self._itemNodes[scId][itId] = node
                     row += 1
                 bgr = row % 2
-                tk.Label(columns[col],
-                         text=itemTitle,
-                         bg=colorsBackground[bgr][bgc],
-                         justify='left',
-                         anchor='w'
-                         ).pack(fill='x', expand=True)
+                tk.Label(
+                    columns[col],
+                    text=itemTitle,
+                    bg=colorsBackground[bgr][bgc],
+                    justify='left',
+                    anchor='w',
+                ).pack(fill='x', expand=True)
                 col += 1
             tk.Label(itemTypeColumn, text=_('Items'), bg=self._prefs['color_item_heading']).pack(fill='x')
 
