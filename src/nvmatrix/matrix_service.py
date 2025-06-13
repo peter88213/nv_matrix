@@ -32,7 +32,9 @@ class MatrixService(SubController):
     OPTIONS = {}
 
     def __init__(self, model, view, controller):
-        super().initialize_controller(model, view, controller)
+        self._mdl = model
+        self._ui = view
+        self._ctrl = controller
         self._matrixViewer = None
 
         #--- Load configuration.
@@ -103,7 +105,11 @@ class MatrixService(SubController):
                 self._matrixViewer.focus()
                 return
 
-        self._matrixViewer = MatrixView(self._mdl, self._ui, self._ctrl, self.prefs)
+        self._matrixViewer = MatrixView(
+            self._mdl,
+            self._ctrl,
+            self.prefs,
+        )
         self._matrixViewer.title(f'{self._mdl.novel.title} - {windowTitle}')
         set_icon(self._matrixViewer, icon='mLogo32', default=False)
 

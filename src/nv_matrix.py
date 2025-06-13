@@ -49,11 +49,17 @@ class Plugin(PluginBase):
         self.matrixService = MatrixService(model, view, controller)
 
         # Create an entry to the Tools menu.
-        self._ui.toolsMenu.add_command(label=self.FEATURE, command=self.start_viewer)
+        self._ui.toolsMenu.add_command(
+            label=self.FEATURE,
+            command=self.start_viewer,
+        )
         self._ui.toolsMenu.entryconfig(self.FEATURE, state='disabled')
 
         # Add an entry to the Help menu.
-        self._ui.helpMenu.add_command(label=_('Matrix plugin Online help'), command=self.open_help)
+        self._ui.helpMenu.add_command(
+            label=_('Matrix plugin Online help'),
+            command=self.open_help,
+        )
 
         #--- Configure the toolbar.
         self._configure_toolbar()
@@ -127,7 +133,11 @@ class Plugin(PluginBase):
             matrixIcon = None
 
         # Put a Separator on the toolbar.
-        tk.Frame(self._ui.toolbar.buttonBar, bg='light gray', width=1).pack(side='left', fill='y', padx=4)
+        tk.Frame(
+            self._ui.toolbar.buttonBar,
+            bg='light gray',
+            width=1,
+        ).pack(side='left', fill='y', padx=4)
 
         # Initialize the operation.
         self._matrixButton = ttk.Button(

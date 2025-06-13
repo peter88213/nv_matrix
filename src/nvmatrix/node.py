@@ -17,7 +17,14 @@ class Node(tk.Label):
     marker = '⬛'
     isLocked = False
 
-    def __init__(self, master, colorFalse='white', colorTrue='black', cnf={}, **kw):
+    def __init__(
+            self,
+            master,
+            colorFalse='white',
+            colorTrue='black',
+            cnf={},
+            **kw
+    ):
         """Place the node to the master widget.
         
         Optional arguments:

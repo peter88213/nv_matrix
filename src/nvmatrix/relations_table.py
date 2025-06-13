@@ -21,7 +21,8 @@ class RelationsTable:
     
     The visual part consists of one frame per column, each containing 
     one node per row. 
-    The logical part consists of one dictionary per element type (protected instance variables):
+    The logical part consists of one dictionary per element type 
+    (protected instance variables):
     {section ID: {element Id: node}}
     """
 
@@ -47,15 +48,24 @@ class RelationsTable:
                 text = f' {text} '
             return text
 
-        colorsBackground = ((self._prefs['color_bg_00'], self._prefs['color_bg_01']),
-                            (self._prefs['color_bg_10'], self._prefs['color_bg_11']))
+        colorsBackground = (
+            (self._prefs['color_bg_00'], self._prefs['color_bg_01']),
+            (self._prefs['color_bg_10'], self._prefs['color_bg_11']),
+        )
         columns = []
         col = 0
         bgc = col % 2
 
         #--- Section title column.
-        tk.Label(master.topLeft, text=_('Sections')).pack(fill='x')
-        tk.Label(master.topLeft, bg=colorsBackground[1][1], text=' ').pack(fill='x')
+        tk.Label(
+            master.topLeft,
+            text=_('Sections'),
+        ).pack(fill='x')
+        tk.Label(
+            master.topLeft,
+            bg=colorsBackground[1][1],
+            text=' ',
+        ).pack(fill='x')
 
         #--- Display titles of "normal" sections.
         row = 0
@@ -99,7 +109,11 @@ class RelationsTable:
         if self._novel.plotLines:
             plotlineTitleWindow = ttk.Frame(master.columnTitles)
             plotlineTitleWindow.pack(side='left', fill='both')
-            tk.Label(plotlineTitleWindow, text=_('Plot lines'), bg=self._prefs['color_plotline_heading']).pack(fill='x')
+            tk.Label(
+                plotlineTitleWindow,
+                text=_('Plot lines'),
+                bg=self._prefs['color_plotline_heading'],
+            ).pack(fill='x')
             plotlineTypeColumn = ttk.Frame(master.display)
             plotlineTypeColumn.pack(side='left', fill='both')
             plotlineColumn = ttk.Frame(plotlineTypeColumn)
@@ -140,7 +154,11 @@ class RelationsTable:
                     anchor='w'
                 ).pack(fill='x', expand=True)
                 col += 1
-            tk.Label(plotlineTypeColumn, text=_('Plot lines'), bg=self._prefs['color_plotline_heading']).pack(fill='x')
+            tk.Label(
+                plotlineTypeColumn,
+                text=_('Plot lines'),
+                bg=self._prefs['color_plotline_heading'],
+            ).pack(fill='x')
 
         #--- Character columns.
         if self._novel.characters:
@@ -150,7 +168,11 @@ class RelationsTable:
             characterColumn.pack(fill='both')
             characterTitleWindow = ttk.Frame(master.columnTitles)
             characterTitleWindow.pack(side='left', fill='both')
-            tk.Label(characterTitleWindow, text=_('Characters'), bg=self._prefs['color_character_heading']).pack(fill='x')
+            tk.Label(
+                characterTitleWindow,
+                text=_('Characters'),
+                bg=self._prefs['color_character_heading'],
+            ).pack(fill='x')
             for crId in self._novel.tree.get_children(CR_ROOT):
                 # Display character titles.
                 row = 1
@@ -187,7 +209,11 @@ class RelationsTable:
                     anchor='w',
                 ).pack(fill='x', expand=True)
                 col += 1
-            tk.Label(characterTypeColumn, text=_('Characters'), bg=self._prefs['color_character_heading']).pack(fill='x')
+            tk.Label(
+                characterTypeColumn,
+                text=_('Characters'),
+                bg=self._prefs['color_character_heading'],
+            ).pack(fill='x')
 
         #--- Location columns.
         if self._novel.locations:
@@ -197,7 +223,11 @@ class RelationsTable:
             locationColumn.pack(fill='both')
             locationTitleWindow = ttk.Frame(master.columnTitles)
             locationTitleWindow.pack(side='left', fill='both')
-            tk.Label(locationTitleWindow, text=_('Locations'), bg=self._prefs['color_location_heading']).pack(fill='x')
+            tk.Label(
+                locationTitleWindow,
+                text=_('Locations'),
+                bg=self._prefs['color_location_heading'],
+            ).pack(fill='x')
             for lcId in self._novel.tree.get_children(LC_ROOT):
                 # Display location titles.
                 row = 1
@@ -234,7 +264,11 @@ class RelationsTable:
                     anchor='w',
                 ).pack(fill='x', expand=True)
                 col += 1
-            tk.Label(locationTypeColumn, text=_('Locations'), bg=self._prefs['color_location_heading']).pack(fill='x')
+            tk.Label(
+                locationTypeColumn,
+                text=_('Locations'),
+                bg=self._prefs['color_location_heading'],
+            ).pack(fill='x')
 
         #--- Item columns.
         if self._novel.items:
@@ -244,7 +278,11 @@ class RelationsTable:
             itemColumn.pack(fill='both')
             itemTitleWindow = ttk.Frame(master.columnTitles)
             itemTitleWindow.pack(side='left', fill='both')
-            tk.Label(itemTitleWindow, text=_('Items'), bg=self._prefs['color_item_heading']).pack(fill='x')
+            tk.Label(
+                itemTitleWindow,
+                text=_('Items'),
+                bg=self._prefs['color_item_heading'],
+            ).pack(fill='x')
             for itId in self._novel.tree.get_children(IT_ROOT):
                 # Display item titles.
                 row = 1
@@ -281,7 +319,11 @@ class RelationsTable:
                     anchor='w',
                 ).pack(fill='x', expand=True)
                 col += 1
-            tk.Label(itemTypeColumn, text=_('Items'), bg=self._prefs['color_item_heading']).pack(fill='x')
+            tk.Label(
+                itemTypeColumn,
+                text=_('Items'),
+                bg=self._prefs['color_item_heading'],
+            ).pack(fill='x')
 
     def set_nodes(self):
         """Loop through all nodes, setting states."""
@@ -289,22 +331,26 @@ class RelationsTable:
 
             # Plot lines.
             for plId in self._novel.plotLines:
-                self._plotlineNodes[scId][plId].state = (plId in self._novel.sections[scId].scPlotLines)
+                self._plotlineNodes[scId][plId].state = (
+                    plId in self._novel.sections[scId].scPlotLines)
 
             # Characters.
             for crId in self._novel.characters:
-                self._characterNodes[scId][crId].state = (crId in self._novel.sections[scId].characters)
+                self._characterNodes[scId][crId].state = (
+                    crId in self._novel.sections[scId].characters)
 
             # Locations.
             for lcId in self._novel.locations:
-                self._locationNodes[scId][lcId].state = (lcId in self._novel.sections[scId].locations)
+                self._locationNodes[scId][lcId].state = (
+                    lcId in self._novel.sections[scId].locations)
 
             # Items.
             for itId in self._novel.items:
-                self._itemNodes[scId][itId].state = (itId in self._novel.sections[scId].items)
+                self._itemNodes[scId][itId].state = (
+                    itId in self._novel.sections[scId].items)
 
     def get_nodes(self):
-        """Loop through all nodes, modifying the sections according to the states."""
+        """Modify the sections according to the node states."""
         for scId in self._plotlineNodes:
 
             # Plot lines.
