@@ -39,9 +39,9 @@ class Plugin(PluginBase):
         """Add a submenu to the 'Tools' menu.
         
         Positional arguments:
-            model -- Reference to the model instance of the application.
-            view -- Reference to the main view instance of the application.
-            controller -- Reference to the main controller instance of the application.
+            model -- Reference to the model instance.
+            view -- Reference to the main view instance.
+            controller -- Reference to the main controller instance.
 
         Extends the superclass method.
         """
