@@ -20,7 +20,7 @@ from nvmatrix.node import Node
 
 class MatrixView(tk.Toplevel, Observer, SubController):
 
-    def __init__(self, model, controller, prefs):
+    def __init__(self, model, controller, prefs, onDoubleClick):
         tk.Toplevel.__init__(self)
 
         self._mdl = model

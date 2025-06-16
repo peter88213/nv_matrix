@@ -31,11 +31,12 @@ class MatrixService(SubController):
     )
     OPTIONS = {}
 
-    def __init__(self, model, view, controller):
+    def __init__(self, model, view, controller, onDoubleClick):
         self._mdl = model
         self._ui = view
         self._ctrl = controller
         self._matrixViewer = None
+        self._onDoubleClick = onDoubleClick
 
         #--- Load configuration.
         try:
@@ -109,6 +110,7 @@ class MatrixService(SubController):
             self._mdl,
             self._ctrl,
             self.prefs,
+            self._onDoubleClick,
         )
         self._matrixViewer.title(f'{self._mdl.novel.title} - {windowTitle}')
         set_icon(self._matrixViewer, icon='mLogo32', default=False)

@@ -46,7 +46,12 @@ class Plugin(PluginBase):
         Extends the superclass method.
         """
         super().install(model, view, controller)
-        self.matrixService = MatrixService(model, view, controller)
+        self.matrixService = MatrixService(
+            model,
+            view,
+            controller,
+            onDoubleClick=self._go_to_selected_section_in_tree,
+        )
 
         # Create an entry to the Tools menu.
         self._ui.toolsMenu.add_command(
@@ -160,3 +165,6 @@ class Plugin(PluginBase):
 
         Hovertip(self._matrixButton, self._matrixButton['text'])
 
+    def _go_to_selected_section_in_tree(self, scId):
+        """Select the section corresponding to the double-clicked event."""
+        self._ui.tv.go_to_node(scId)
