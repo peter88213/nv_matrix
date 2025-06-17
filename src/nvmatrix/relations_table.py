@@ -74,26 +74,25 @@ class RelationsTable:
         self._locationNodes = {}
         self._itemNodes = {}
         for chId in self._novel.tree.get_children(CH_ROOT):
-            if self._novel.chapters[chId].chType == 0:
-                for scId in self._novel.tree.get_children(chId):
-                    bgr = row % 2
-                    if self._novel.sections[scId].scType != 0:
-                        continue
+            for scId in self._novel.tree.get_children(chId):
+                bgr = row % 2
+                if self._novel.sections[scId].scType != 0:
+                    continue
 
-                    #--- Initialize matrix section row dictionaries.
-                    self._characterNodes[scId] = {}
-                    self._locationNodes[scId] = {}
-                    self._itemNodes[scId] = {}
-                    self._plotlineNodes[scId] = {}
+                #--- Initialize matrix section row dictionaries.
+                self._characterNodes[scId] = {}
+                self._locationNodes[scId] = {}
+                self._itemNodes[scId] = {}
+                self._plotlineNodes[scId] = {}
 
-                    tk.Label(
-                        master.rowTitles,
-                        text=self._novel.sections[scId].title,
-                        bg=colorsBackground[bgr][1],
-                        justify='left',
-                        anchor='w',
-                    ).pack(fill='x')
-                    row += 1
+                tk.Label(
+                    master.rowTitles,
+                    text=self._novel.sections[scId].title,
+                    bg=colorsBackground[bgr][1],
+                    justify='left',
+                    anchor='w',
+                ).pack(fill='x')
+                row += 1
         bgr = row % 2
         tk.Label(
             master.rowTitles,
