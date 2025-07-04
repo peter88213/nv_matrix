@@ -366,7 +366,8 @@ class RelationsTable:
                     if scId in plotlineSections:
                         plotlineSections.remove(scId)
                     for ppId in list(self._novel.sections[scId].scPlotPoints):
-                        if self._novel.sections[scId].scPlotPoints[ppId] == plId:
+                        if self._novel.sections[scId
+                                                ].scPlotPoints[ppId] == plId:
                             del self._novel.sections[scId].scPlotPoints[ppId]
                             self._novel.plotPoints[ppId].sectionAssoc = None
                             # don't trigger the update here

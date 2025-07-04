@@ -12,7 +12,8 @@ class Node(tk.Label):
     """A visual matrix node, representing a boolean value.
     
     Properties:
-        state: Boolean -- Node state. Changes its value and view when clicked on.
+        state: Boolean -- Node state. Changes its value and view 
+                          when clicked on.
     """
     marker = '⬛'
     isLocked = False
