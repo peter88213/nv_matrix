@@ -47,10 +47,13 @@ class Plugin(PluginBase):
         """
         super().install(model, view, controller)
         self.matrixService = MatrixService(model, view, controller)
+        self._icon = self._get_icon('matrix.png')
 
         # Create an entry to the Tools menu.
         self._ui.toolsMenu.add_command(
             label=self.FEATURE,
+            image=self._icon,
+            compound='left',
             command=self.start_viewer,
         )
         self._ui.toolsMenu.entryconfig(self.FEATURE, state='disabled')
@@ -58,6 +61,8 @@ class Plugin(PluginBase):
         # Add an entry to the Help menu.
         self._ui.helpMenu.add_command(
             label=_('Matrix plugin Online help'),
+            image=self._icon,
+            compound='left',
             command=self.open_help,
         )
 
@@ -116,22 +121,6 @@ class Plugin(PluginBase):
 
     def _configure_toolbar(self):
 
-        # Get the icons.
-        prefs = self._ctrl.get_preferences()
-        if prefs.get('large_icons', False):
-            size = 24
-        else:
-            size = 16
-        try:
-            homeDir = str(Path.home()).replace('\\', '/')
-            iconPath = f'{homeDir}/.novx/icons/{size}'
-        except:
-            iconPath = None
-        try:
-            matrixIcon = tk.PhotoImage(file=f'{iconPath}/matrix.png')
-        except:
-            matrixIcon = None
-
         # Put a Separator on the toolbar.
         tk.Frame(
             self._ui.toolbar.buttonBar,
@@ -143,14 +132,14 @@ class Plugin(PluginBase):
         self._matrixButton = ttk.Button(
             self._ui.toolbar.buttonBar,
             text=_('Matrix'),
-            image=matrixIcon,
+            image=self._icon,
             command=self.start_viewer
             )
         self._matrixButton.pack(side='left')
-        self._matrixButton.image = matrixIcon
+        self._matrixButton.image = self._icon
 
         # Initialize tooltip.
-        if not prefs['enable_hovertips']:
+        if not self._ctrl.get_preferences()['enable_hovertips']:
             return
 
         try:
@@ -160,3 +149,16 @@ class Plugin(PluginBase):
 
         Hovertip(self._matrixButton, self._matrixButton['text'])
 
+    def _get_icon(self, fileName):
+        # Return the icon for the main view.
+        if self._ctrl.get_preferences().get('large_icons', False):
+            size = 24
+        else:
+            size = 16
+        try:
+            homeDir = str(Path.home()).replace('\\', '/')
+            iconPath = f'{homeDir}/.novx/icons/{size}'
+            icon = tk.PhotoImage(file=f'{iconPath}/{fileName}')
+        except:
+            icon = None
+        return icon
