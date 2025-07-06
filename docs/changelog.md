@@ -5,6 +5,13 @@
 ## Changelog
 
 
+### Version 5.1.1
+
+- Changed the icon.
+
+API: 5.0
+Based on novelibre 5.29.0
+
 
 ### Version 5.1.0
 

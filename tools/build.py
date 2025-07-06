@@ -13,7 +13,7 @@ import sys
 sys.path.insert(0, f'{os.getcwd()}/../../novelibre/tools')
 from package_builder import PackageBuilder
 
-VERSION = '5.1.0'
+VERSION = '5.1.1'
 
 
 class PluginBuilder(PackageBuilder):
@@ -27,7 +27,7 @@ class PluginBuilder(PackageBuilder):
 
     def add_icons(self):
         super().add_icons()
-        copy2('../icons/mLogo32.png', f'{self.buildDir}/icons')
+        copy2('../icons/matrix.png', f'{self.buildDir}/icons')
 
 
 def main():

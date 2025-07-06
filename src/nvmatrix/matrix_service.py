@@ -111,5 +111,5 @@ class MatrixService(SubController):
             self.prefs,
         )
         self._matrixViewer.title(f'{self._mdl.novel.title} - {windowTitle}')
-        set_icon(self._matrixViewer, icon='mLogo32', default=False)
+        set_icon(self._matrixViewer, icon='matrix', default=False)
 
