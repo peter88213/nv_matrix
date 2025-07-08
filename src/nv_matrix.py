@@ -55,8 +55,8 @@ class Plugin(PluginBase):
             image=self._icon,
             compound='left',
             command=self.start_viewer,
+            state='disabled',
         )
-        self._ui.toolsMenu.entryconfig(self.FEATURE, state='disabled')
 
         # Add an entry to the Help menu.
         self._ui.helpMenu.add_command(
