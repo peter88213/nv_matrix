@@ -6,8 +6,9 @@ License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 from tkinter import ttk
 
-from nvlib.gui.observer import Observer
 from nvlib.controller.sub_controller import SubController
+from nvlib.gui.observer import Observer
+from nvmatrix.node import Node
 from nvmatrix.nvmatrix_locale import _
 from nvmatrix.platform.platform_settings import KEYS
 from nvmatrix.platform.platform_settings import MOUSE
@@ -15,7 +16,6 @@ from nvmatrix.platform.platform_settings import PLATFORM
 from nvmatrix.relations_table import RelationsTable
 from nvmatrix.widgets.table_frame import TableFrame
 import tkinter as tk
-from nvmatrix.node import Node
 
 
 class MatrixView(tk.Toplevel, Observer, SubController):
