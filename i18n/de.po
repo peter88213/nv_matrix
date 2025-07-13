@@ -3,15 +3,21 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.2.0\n"
-"POT-Creation-Date: 2025-07-06 21:41:35\n"
-"PO-Revision-Date: 2025-07-06 21:41:35\n"
+"Project-Id-Version: 5.2.1\n"
+"POT-Creation-Date: 2025-07-13 11:37:03\n"
+"PO-Revision-Date: 2025-07-13 11:37:03\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+
+msgid "1st Edit"
+msgstr "1. Überarbeitung"
+
+msgid "2nd Edit"
+msgstr "2. Überarbeitung"
 
 msgid "Characters"
 msgstr "Figuren"
@@ -21,6 +27,12 @@ msgstr "Schließen"
 
 msgid "Ctrl"
 msgstr "Strg"
+
+msgid "Done"
+msgstr "Fertiggestellt"
+
+msgid "Draft"
+msgstr "Entwurf"
 
 msgid "Items"
 msgstr "Gegenstände"
@@ -39,6 +51,9 @@ msgstr "Matrix-Plugin Online-Hilfe"
 
 msgid "Minor Character"
 msgstr "Nebenfigur"
+
+msgid "Outline"
+msgstr "Gliederung"
 
 msgid "Plot lines"
 msgstr "Plotlinien"
