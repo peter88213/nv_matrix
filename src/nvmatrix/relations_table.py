@@ -73,11 +73,15 @@ class RelationsTable:
         self._characterNodes = {}
         self._locationNodes = {}
         self._itemNodes = {}
+        self._sections = []
+
         for chId in self._novel.tree.get_children(CH_ROOT):
             for scId in self._novel.tree.get_children(chId):
                 bgr = row % 2
                 if self._novel.sections[scId].scType != 0:
                     continue
+
+                self._sections.append(scId)
 
                 #--- Initialize matrix section row dictionaries.
                 self._characterNodes[scId] = {}
@@ -105,7 +109,7 @@ class RelationsTable:
         ).pack(fill='x')
 
         #--- Plot line columns.
-        if self._novel.plotLines:
+        if self._novel.plotLines and self._prefs['show_plot_lines']:
             plotlineTitleWindow = ttk.Frame(master.columnTitles)
             plotlineTitleWindow.pack(side='left', fill='both')
             tk.Label(
@@ -160,7 +164,7 @@ class RelationsTable:
             ).pack(fill='x')
 
         #--- Character columns.
-        if self._novel.characters:
+        if self._novel.characters and self._prefs['show_characters']:
             characterTypeColumn = ttk.Frame(master.display)
             characterTypeColumn.pack(side='left', fill='both')
             characterColumn = ttk.Frame(characterTypeColumn)
@@ -173,6 +177,12 @@ class RelationsTable:
                 bg=self._prefs['color_character_heading'],
             ).pack(fill='x')
             for crId in self._novel.tree.get_children(CR_ROOT):
+                if (
+                    self._prefs['major_characters_only']
+                    and not self._novel.characters[crId].isMajor
+                ):
+                    continue
+
                 # Display character titles.
                 row = 1
                 bgr = row % 2
@@ -215,7 +225,7 @@ class RelationsTable:
             ).pack(fill='x')
 
         #--- Location columns.
-        if self._novel.locations:
+        if self._novel.locations and self._prefs['show_locations']:
             locationTypeColumn = ttk.Frame(master.display)
             locationTypeColumn.pack(side='left', fill='both')
             locationColumn = ttk.Frame(locationTypeColumn)
@@ -270,7 +280,7 @@ class RelationsTable:
             ).pack(fill='x')
 
         #--- Item columns.
-        if self._novel.items:
+        if self._novel.items and self._prefs['show_items']:
             itemTypeColumn = ttk.Frame(master.display)
             itemTypeColumn.pack(side='left', fill='both')
             itemColumn = ttk.Frame(itemTypeColumn)
@@ -326,82 +336,110 @@ class RelationsTable:
 
     def set_nodes(self):
         """Loop through all nodes, setting states."""
-        for scId in self._plotlineNodes:
+        for scId in self._sections:
 
             # Plot lines.
-            for plId in self._novel.plotLines:
-                self._plotlineNodes[scId][plId].state = (
-                    plId in self._novel.sections[scId].scPlotLines)
+            if self._prefs['show_plot_lines']:
+                for plId in self._novel.plotLines:
+                    self._plotlineNodes[scId][plId].state = (
+                        plId in self._novel.sections[scId].scPlotLines)
 
             # Characters.
-            for crId in self._novel.characters:
-                self._characterNodes[scId][crId].state = (
-                    crId in self._novel.sections[scId].characters)
+            if self._prefs['show_characters']:
+                for crId in self._novel.characters:
+                    if (
+                        self._prefs['major_characters_only']
+                        and not self._novel.characters[crId].isMajor
+                    ):
+                        continue
+
+                    self._characterNodes[scId][crId].state = (
+                        crId in self._novel.sections[scId].characters)
 
             # Locations.
-            for lcId in self._novel.locations:
-                self._locationNodes[scId][lcId].state = (
-                    lcId in self._novel.sections[scId].locations)
+            if self._prefs['show_locations']:
+                for lcId in self._novel.locations:
+                    self._locationNodes[scId][lcId].state = (
+                        lcId in self._novel.sections[scId].locations)
 
             # Items.
-            for itId in self._novel.items:
-                self._itemNodes[scId][itId].state = (
-                    itId in self._novel.sections[scId].items)
+            if self._prefs['show_items']:
+                for itId in self._novel.items:
+                    self._itemNodes[scId][itId].state = (
+                        itId in self._novel.sections[scId].items)
 
     def get_nodes(self):
         """Modify the sections according to the node states."""
-        for scId in self._plotlineNodes:
+
+        def get_plot_line_node(plId, scId):
+            plotlineSections = self._novel.plotLines[plId].sections
+            if self._plotlineNodes[scId][plId].state:
+                if not plId in self._novel.sections[scId].scPlotLines:
+                    self._novel.sections[scId].scPlotLines.append(plId)
+                if not scId in plotlineSections:
+                    plotlineSections.append(scId)
+            else:
+                if plId in self._novel.sections[scId].scPlotLines:
+                    self._novel.sections[scId].scPlotLines.remove(plId)
+                if scId in plotlineSections:
+                    plotlineSections.remove(scId)
+                for ppId in list(self._novel.sections[scId].scPlotPoints):
+                    if (
+                        self._novel.sections[scId].scPlotPoints[ppId]
+                        == plId
+                    ):
+                        del self._novel.sections[scId].scPlotPoints[ppId]
+                        self._novel.plotPoints[ppId].sectionAssoc = None
+                        # don't trigger the update here
+            self._novel.plotLines[plId].sections = plotlineSections
+
+        def get_character_node(crId, scCharacters):
+            if (
+                self._prefs['major_characters_only']
+                and not self._novel.characters[crId].isMajor
+            ):
+                return
+
+            if self._characterNodes[scId][crId].state:
+                if not crId in scCharacters:
+                    scCharacters.append(crId)
+            elif crId in scCharacters:
+                scCharacters.remove(crId)
+
+        for scId in self._sections:
 
             # Plot lines.
-            for plId in self._novel.plotLines:
-                plotlineSections = self._novel.plotLines[plId].sections
-                if self._plotlineNodes[scId][plId].state:
-                    if not plId in self._novel.sections[scId].scPlotLines:
-                        self._novel.sections[scId].scPlotLines.append(plId)
-                    if not scId in plotlineSections:
-                        plotlineSections.append(scId)
-                else:
-                    if plId in self._novel.sections[scId].scPlotLines:
-                        self._novel.sections[scId].scPlotLines.remove(plId)
-                    if scId in plotlineSections:
-                        plotlineSections.remove(scId)
-                    for ppId in list(self._novel.sections[scId].scPlotPoints):
-                        if self._novel.sections[scId
-                                                ].scPlotPoints[ppId] == plId:
-                            del self._novel.sections[scId].scPlotPoints[ppId]
-                            self._novel.plotPoints[ppId].sectionAssoc = None
-                            # don't trigger the update here
-                self._novel.plotLines[plId].sections = plotlineSections
+            if self._prefs['show_plot_lines']:
+                for plId in self._novel.plotLines:
+                    get_plot_line_node(plId, scId)
 
             # Characters.
-            scCharacters = self._novel.sections[scId].characters
-            # this keeps the order
-            for crId in self._novel.characters:
-                if self._characterNodes[scId][crId].state:
-                    if not crId in scCharacters:
-                        scCharacters.append(crId)
-                elif crId in scCharacters:
-                    scCharacters.remove(crId)
-            self._novel.sections[scId].characters = scCharacters
+            if self._prefs['show_characters']:
+                scCharacters = self._novel.sections[scId].characters
+                # this keeps the order
+                for crId in self._novel.characters:
+                    get_character_node(crId, scCharacters)
+                self._novel.sections[scId].characters = scCharacters
 
             # Locations.
-            scLocations = self._novel.sections[scId].locations
-            for lcId in self._novel.locations:
-                if self._locationNodes[scId][lcId].state:
-                    if not lcId in scLocations:
-                        scLocations.append(lcId)
-                elif lcId in scLocations:
-                    scLocations.remove(lcId)
-            self._novel.sections[scId].locations = scLocations
+            if self._prefs['show_locations']:
+                scLocations = self._novel.sections[scId].locations
+                for lcId in self._novel.locations:
+                    if self._locationNodes[scId][lcId].state:
+                        if not lcId in scLocations:
+                            scLocations.append(lcId)
+                    elif lcId in scLocations:
+                        scLocations.remove(lcId)
+                self._novel.sections[scId].locations = scLocations
 
             # Items.
-            scItems = self._novel.sections[scId].items
-            for itId in self._novel.items:
-                if self._itemNodes[scId][itId].state:
-                    if itId in scItems:
-                        scItems.append(itId)
-                elif itId in scItems:
-                    scItems.remove(itId)
-
-            self._novel.sections[scId].items = scItems
+            if self._prefs['show_items']:
+                scItems = self._novel.sections[scId].items
+                for itId in self._novel.items:
+                    if self._itemNodes[scId][itId].state:
+                        if itId in scItems:
+                            scItems.append(itId)
+                    elif itId in scItems:
+                        scItems.remove(itId)
+                self._novel.sections[scId].items = scItems
 

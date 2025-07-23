@@ -29,7 +29,13 @@ class MatrixService(SubController):
         color_item_heading='aquamarine1',
         color_item_node='aquamarine3',
     )
-    OPTIONS = {}
+    OPTIONS = dict(
+        show_plot_lines=True,
+        show_characters=True,
+        show_locations=False,
+        show_items=True,
+        major_characters_only=False,
+    )
 
     def __init__(self, model, view, controller):
         self._mdl = model

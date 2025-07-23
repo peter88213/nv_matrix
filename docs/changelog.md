@@ -5,6 +5,15 @@
 ## Changelog
 
 
+### Version 5.3.0
+
+- Showing/hiding categories for display (Closes #3).
+- Filtering characters (Closes #2).
+
+API: 5.0
+Based on novelibre 5.29.8
+
+
 ### Version 5.2.1
 
 - Changed the icon.

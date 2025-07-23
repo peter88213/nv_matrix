@@ -64,6 +64,71 @@ class MatrixView(tk.Toplevel, Observer, SubController):
         self._skipUpdate = False
         self.bind(MOUSE.TOGGLE_STATE, self._on_element_change)
 
+        # "Show plot lines" checkbox.
+        self._showPlotlines = tk.BooleanVar(
+            value=self.prefs['show_plot_lines'],
+        )
+        ttk.Checkbutton(
+            self,
+            text=_('Plot lines'),
+            variable=self._showPlotlines,
+            onvalue=True,
+            offvalue=False,
+            command=self._change_show_plot_lines,
+        ).pack(side='left', padx=5, pady=5)
+
+        # "Show characters" checkbox.
+        self._showCharacters = tk.BooleanVar(
+            value=self.prefs['show_characters'],
+        )
+        ttk.Checkbutton(
+            self,
+            text=_('Characters'),
+            variable=self._showCharacters,
+            onvalue=True,
+            offvalue=False,
+            command=self._change_show_characters,
+        ).pack(side='left', padx=5, pady=5)
+
+        # "Show locations" checkbox.
+        self._showLocations = tk.BooleanVar(
+            value=self.prefs['show_locations'],
+        )
+        ttk.Checkbutton(
+            self,
+            text=_('Locations'),
+            variable=self._showLocations,
+            onvalue=True,
+            offvalue=False,
+            command=self._change_show_locations,
+        ).pack(side='left', padx=5, pady=5)
+
+        # "Show items" checkbox.
+        self._showItems = tk.BooleanVar(
+            value=self.prefs['show_items'],
+        )
+        ttk.Checkbutton(
+            self,
+            text=_('Items'),
+            variable=self._showItems,
+            onvalue=True,
+            offvalue=False,
+            command=self._change_show_items,
+        ).pack(side='left', padx=5, pady=5)
+
+        # "Major characters only" checkbox.
+        self._majorCharactersOnly = tk.BooleanVar(
+            value=self.prefs['major_characters_only'],
+        )
+        ttk.Checkbutton(
+            self,
+            text=_('Major characters only'),
+            variable=self._majorCharactersOnly,
+            onvalue=True,
+            offvalue=False,
+            command=self._change_major_characters_only,
+        ).pack(side='left', padx=5, pady=5)
+
         # "Close" button.
         ttk.Button(
             self,
@@ -102,8 +167,39 @@ class MatrixView(tk.Toplevel, Observer, SubController):
         """Enable element change."""
         Node.isLocked = False
 
+    def _change_major_characters_only(self):
+        self.prefs['major_characters_only'] = (
+            self._majorCharactersOnly.get()
+        )
+        if self.prefs['show_characters']:
+            self.refresh()
+
+    def _change_show_characters(self):
+        self.prefs['show_characters'] = (
+            self._showCharacters.get()
+        )
+        self.refresh()
+
+    def _change_show_items(self):
+        self.prefs['show_items'] = (
+            self._showItems.get()
+        )
+        self.refresh()
+
+    def _change_show_locations(self):
+        self.prefs['show_locations'] = (
+            self._showLocations.get()
+        )
+        self.refresh()
+
+    def _change_show_plot_lines(self):
+        self.prefs['show_plot_lines'] = (
+            self._showPlotlines.get()
+        )
+        self.refresh()
+
     def _on_element_change(self, event=None):
-        """Update the model, but not the view."""
+        # Update the model, but not the view.
         self._skipUpdate = True
         self._relationsTable.get_nodes()
         self._skipUpdate = False
