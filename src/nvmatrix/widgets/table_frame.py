@@ -38,7 +38,7 @@ import tkinter as tk
 
 
 class TableFrame(ttk.Frame):
-    """A tkinter framew for a scrollable table. 
+    """A tkinter frame for a scrollable table. 
     
     Public instance variables:
         rowTitles -- ttk.Frame for a vertically scrolled column of row titles.
@@ -91,6 +91,7 @@ class TableFrame(ttk.Frame):
         )
 
         def _configure_rowTitles(event):
+            self.update_idletasks()
             # Update the scrollbars to match the size of the display frame.
             size = (
                 self.rowTitles.winfo_reqwidth(),
@@ -138,6 +139,7 @@ class TableFrame(ttk.Frame):
         )
 
         def _configure_columnTitles(event):
+            self.update_idletasks()
             # Update the scrollbars to match the size of the display frame.
             size = (
                 self.columnTitles.winfo_reqwidth(),
@@ -171,6 +173,7 @@ class TableFrame(ttk.Frame):
             displayFrame,
             bd=0,
             highlightthickness=0,
+            background='red',
         )
         self._displayCanvas.configure(xscrollcommand=scrollX.set)
         self._displayCanvas.configure(yscrollcommand=scrollY.set)
@@ -190,20 +193,32 @@ class TableFrame(ttk.Frame):
         )
 
         def _configure_display(event):
+            self.update_idletasks()
             # Update the scrollbars to match the size of the display frame.
             size = (
                 self.display.winfo_reqwidth(),
                 self.display.winfo_reqheight()
             )
             self._displayCanvas.config(scrollregion="0 0 %s %s" % size)
+            print(
+                f'required: {self.display.winfo_reqwidth()} x {self.display.winfo_reqheight()}\n',
+                f'actual: {self._displayCanvas.winfo_width()} x {self._displayCanvas.winfo_height()}'
+            )
             if (
-                self.display.winfo_reqwidth()
-                != self._displayCanvas.winfo_width()
+                self._displayCanvas.winfo_width()
+                > self.display.winfo_reqwidth()
             ):
                 # Update the display Canvas's width to fit the inner frame.
                 self._displayCanvas.config(width=self.display.winfo_reqwidth())
 
-        self.display.bind('<Configure>', _configure_display)
+            if (
+                self._displayCanvas.winfo_height()
+                > self.display.winfo_reqheight()
+            ):
+                # Update the display Canvas's width to fit the inner frame.
+                self._displayCanvas.config(height=self.display.winfo_reqheight())
+
+        self.bind('<Configure>', _configure_display)
         self.bind('<Enter>', self._bind_mousewheel)
         self.bind('<Leave>', self._unbind_mousewheel)
         # this will prevent the frame from being scrolled
