@@ -11,7 +11,7 @@
 - Filtering characters (Closes #2).
 
 API: 5.0
-Based on novelibre 5.29.8
+Based on novelibre 5.29.8 (5.30.0)
 
 
 ### Version 5.2.1
