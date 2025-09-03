@@ -3,8 +3,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.3.0\n"
-"POT-Creation-Date: 2025-08-16 15:14:10\n"
+"Project-Id-Version: 5.4.0\n"
+"POT-Creation-Date: 2025-09-03 09:55:54\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -20,6 +20,12 @@ msgstr ""
 msgid "2nd Edit"
 msgstr ""
 
+msgid "Bio"
+msgstr ""
+
+msgid "Characterization"
+msgstr ""
+
 msgid "Characters"
 msgstr ""
 
@@ -33,6 +39,12 @@ msgid "Done"
 msgstr ""
 
 msgid "Draft"
+msgstr ""
+
+msgid "Ending"
+msgstr ""
+
+msgid "Goals"
 msgstr ""
 
 msgid "Items"
@@ -56,13 +68,25 @@ msgstr ""
 msgid "Minor Character"
 msgstr ""
 
+msgid "Opening"
+msgstr ""
+
 msgid "Outline"
+msgstr ""
+
+msgid "Peak emotional moment"
 msgstr ""
 
 msgid "Plot lines"
 msgstr ""
 
+msgid "Plot progress"
+msgstr ""
+
 msgid "Sections"
+msgstr ""
+
+msgid "World building"
 msgstr ""
 
 msgid "https://peter88213.github.io/nvhelp-en"

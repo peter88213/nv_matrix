@@ -28,7 +28,7 @@ import tkinter as tk
 class Plugin(PluginBase):
     """novelibre relationship matrix plugin class."""
     VERSION = '@release'
-    API_VERSION = '5.0'
+    API_VERSION = '5.35'
     DESCRIPTION = 'A section relationship table'
     URL = 'https://github.com/peter88213/nv_matrix'
     HELP_URL = f'{_("https://peter88213.github.io/nvhelp-en")}/nv_matrix/'
@@ -142,12 +142,9 @@ class Plugin(PluginBase):
         if not self._ctrl.get_preferences()['enable_hovertips']:
             return
 
-        try:
-            from idlelib.tooltip import Hovertip
-        except ModuleNotFoundError:
-            return
-
-        Hovertip(self._matrixButton, self._matrixButton['text'])
+        self._mdl.nvService.new_hovertip(
+            self._matrixButton, self._matrixButton['text']
+        )
 
     def _get_icon(self, fileName):
         # Return the icon for the main view.
