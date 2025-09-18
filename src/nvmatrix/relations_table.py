@@ -26,7 +26,7 @@ class RelationsTable:
     {section ID: {element Id: node}}
     """
 
-    def __init__(self, master, novel, prefs):
+    def __init__(self, master, novel, prefs, setHovertip):
         """Draw the matrix with blank nodes.
         
         Positional arguments:
@@ -35,6 +35,7 @@ class RelationsTable:
         """
         self._novel = novel
         self._prefs = prefs
+        self._setHovertip = setHovertip
         self.draw_matrix(master)
 
     def draw_matrix(self, master):
@@ -127,13 +128,16 @@ class RelationsTable:
                 bgr = row % 2
                 bgc = col % 2
                 plotlineTitle = fill_str(self._novel.plotLines[plId].shortName)
-                tk.Label(
+                hoverText = self._novel.plotLines[plId].title
+                pl = tk.Label(
                     plotlineTitleWindow,
                     text=plotlineTitle,
                     bg=colorsBackground[bgr][bgc],
                     justify='left',
                     anchor='w',
-                ).pack(side='left', fill='x', expand=True)
+                )
+                pl.pack(side='left', fill='x', expand=True)
+                self._setHovertip(pl, hoverText)
                 row += 1
 
                 # Display plot line nodes.
@@ -141,21 +145,24 @@ class RelationsTable:
                 columns[col].pack(side='left', fill='both', expand=True)
                 for scId in self._plotlineNodes:
                     bgr = row % 2
-                    node = Node(columns[col],
-                         colorFalse=colorsBackground[bgr][bgc],
-                         colorTrue=self._prefs['color_plotline_node']
-                         )
+                    node = Node(
+                        columns[col],
+                        colorFalse=colorsBackground[bgr][bgc],
+                        colorTrue=self._prefs['color_plotline_node']
+                    )
                     node.pack(fill='x', expand=True)
                     self._plotlineNodes[scId][plId] = node
                     row += 1
                 bgr = row % 2
-                tk.Label(
+                pl = tk.Label(
                     columns[col],
                     text=plotlineTitle,
                     bg=colorsBackground[bgr][bgc],
                     justify='left',
                     anchor='w'
-                ).pack(fill='x', expand=True)
+                )
+                pl.pack(fill='x', expand=True)
+                self._setHovertip(pl, hoverText)
                 col += 1
             tk.Label(
                 plotlineTypeColumn,
@@ -188,13 +195,21 @@ class RelationsTable:
                 bgr = row % 2
                 bgc = col % 2
                 characterTitle = fill_str(self._novel.characters[crId].title)
-                tk.Label(
+                hoverText = self._novel.characters[crId].fullName
+                if self._novel.characters[crId].aka:
+                    hoverText = (
+                        f'{hoverText}\n'
+                        f'({self._novel.characters[crId].aka})'
+                    )
+                cr = tk.Label(
                     characterTitleWindow,
                     text=characterTitle,
                     bg=colorsBackground[bgr][bgc],
                     justify='left',
                     anchor='w',
-                ).pack(side='left', fill='x', expand=True)
+                )
+                cr.pack(side='left', fill='x', expand=True)
+                self._setHovertip(cr, hoverText)
                 row += 1
 
                 # Display character nodes.
@@ -202,21 +217,24 @@ class RelationsTable:
                 columns[col].pack(side='left', fill='both', expand=True)
                 for scId in self._characterNodes:
                     bgr = row % 2
-                    node = Node(columns[col],
-                         colorFalse=colorsBackground[bgr][bgc],
-                         colorTrue=self._prefs['color_character_node']
-                         )
+                    node = Node(
+                        columns[col],
+                        colorFalse=colorsBackground[bgr][bgc],
+                        colorTrue=self._prefs['color_character_node']
+                    )
                     node.pack(fill='x', expand=True)
                     self._characterNodes[scId][crId] = node
                     row += 1
                 bgr = row % 2
-                tk.Label(
+                cr = tk.Label(
                     columns[col],
                     text=characterTitle,
                     bg=colorsBackground[bgr][bgc],
                     justify='left',
                     anchor='w',
-                ).pack(fill='x', expand=True)
+                )
+                cr.pack(fill='x', expand=True)
+                self._setHovertip(cr, hoverText)
                 col += 1
             tk.Label(
                 characterTypeColumn,

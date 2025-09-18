@@ -56,6 +56,7 @@ class MatrixView(tk.Toplevel, Observer, SubController):
                 self.tableFrame,
                 self._mdl.novel,
                 self.prefs,
+                self._mdl.nvService.new_hovertip,
             )
             self._relationsTable.set_nodes()
         self.tableFrame.pack(fill='both', expand=True, padx=2, pady=2)

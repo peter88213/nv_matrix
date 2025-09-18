@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 5.6.0
+
+- Displaying plotline titles and characters' full names with tooltips.
+
+API: 5.35
+Based on novelibre 5.38.0
+
+
 ### Version 5.4.0
 
 - Under Linux, the *idle3* package is no longer needed for displaying tooltips.
