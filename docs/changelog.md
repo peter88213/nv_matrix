@@ -5,7 +5,7 @@
 ## Changelog
 
 
-### Version 5.6.0
+### Version 5.5.0
 
 - Displaying plotline titles and characters' full names with tooltips.
 
