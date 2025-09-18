@@ -4,6 +4,7 @@ Copyright (c) 2025 Peter Triesberger
 For further information see https://github.com/peter88213/nv_matrix
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
+import textwrap
 from tkinter import ttk
 
 from nvlib.novx_globals import CH_ROOT
@@ -25,6 +26,7 @@ class RelationsTable:
     (protected instance variables):
     {section ID: {element Id: node}}
     """
+    NOTE_WIDTH = 30
 
     def __init__(self, master, novel, prefs, setHovertip):
         """Draw the matrix with blank nodes.
@@ -152,6 +154,18 @@ class RelationsTable:
                     )
                     node.pack(fill='x', expand=True)
                     self._plotlineNodes[scId][plId] = node
+                    if self._novel.sections[scId].plotlineNotes.get(
+                        plId,
+                        None
+                    ):
+                        plNotes = textwrap.wrap(
+                            self._novel.sections[scId].plotlineNotes[plId],
+                            width=self.NOTE_WIDTH,
+                        )
+                        self._setHovertip(
+                            node,
+                            '\n'.join(plNotes),
+                        )
                     row += 1
                 bgr = row % 2
                 pl = tk.Label(

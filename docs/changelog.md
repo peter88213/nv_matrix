@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 5.5.1
+
+- Displaying the sections' plotline notes with tooltips.
+
+API: 5.35
+Based on novelibre 5.38.0
+
+
 ### Version 5.5.0
 
 - Displaying plotline titles and characters' full names with tooltips.
