@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 5.6.0
+
+- Using the toolbar methods provided with novelibre 5.44.
+
+API: 5.44
+Based on novelibre 5.44.0
+
+
 ### Version 5.5.1
 
 - Displaying the sections' plotline notes with tooltips.
