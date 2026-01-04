@@ -469,7 +469,7 @@ class RelationsTable:
                 scItems = self._novel.sections[scId].items
                 for itId in self._novel.items:
                     if self._itemNodes[scId][itId].state:
-                        if itId in scItems:
+                        if not itId in scItems:
                             scItems.append(itId)
                     elif itId in scItems:
                         scItems.remove(itId)

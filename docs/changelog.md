@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 5.6.1
+
+- Fixed a bug where the assignment of items goes wrong.
+
+API: 5.44
+Based on novelibre 5.48.2
+
+
 ### Version 5.6.0
 
 - Using the toolbar methods provided with novelibre 5.44.
