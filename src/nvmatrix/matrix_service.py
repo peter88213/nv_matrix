@@ -49,12 +49,12 @@ class MatrixService(SubController):
             configDir = f'{homeDir}/{self.INI_FILEPATH}'
         except:
             configDir = '.'
-        self.iniFile = f'{configDir}/{self.INI_FILENAME}'
         self.configuration = self._mdl.nvService.new_configuration(
             settings=self.SETTINGS,
-            options=self.OPTIONS
+            options=self.OPTIONS,
+            filePath=f'{configDir}/{self.INI_FILENAME}',
             )
-        self.configuration.read(self.iniFile)
+        self.configuration.read()
         self.prefs = {}
         self.prefs.update(self.configuration.settings)
         self.prefs.update(self.configuration.options)
@@ -89,7 +89,7 @@ class MatrixService(SubController):
                 self.configuration.options[keyword] = self.prefs[keyword]
             elif keyword in self.configuration.settings:
                 self.configuration.settings[keyword] = self.prefs[keyword]
-        self.configuration.write(self.iniFile)
+        self.configuration.write()
 
     def unlock(self):
         """Enable changes on the model.
