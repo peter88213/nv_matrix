@@ -25,7 +25,7 @@ from nvmatrix.matrix_service import MatrixService
 class Plugin(PluginBase):
     """novelibre relationship matrix plugin class."""
     VERSION = '@release'
-    API_VERSION = '5.44'
+    API_VERSION = '5.50'
     DESCRIPTION = 'A section relationship table'
     URL = 'https://github.com/peter88213/nv_matrix'
     HELP_URL = f'{_("https://peter88213.github.io/nvhelp-en")}/nv_matrix/'

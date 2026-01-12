@@ -53,7 +53,7 @@ class MatrixService(SubController):
             settings=self.SETTINGS,
             options=self.OPTIONS,
             filePath=f'{configDir}/{self.INI_FILENAME}',
-            )
+        )
         self.configuration.read()
         self.prefs = {}
         self.prefs.update(self.configuration.settings)
