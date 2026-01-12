@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 5.7.0
+
+- Refactored the code for better maintainability.
+
+API: 5.50
+Based on novelibre 5.50.0
+
+
 ### Version 5.6.1
 
 - Fixed a bug where the assignment of items goes wrong.

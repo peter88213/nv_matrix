@@ -27,7 +27,7 @@ https://stackoverflow.com/questions/17355902/
 https://stackoverflow.com/questions/63629407/
 https://stackoverflow.com/questions/51538818/
 
-Copyright (c) 2025 Peter Triesberger
+Copyright (c) Peter Triesberger
 https://github.com/peter88213/
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
