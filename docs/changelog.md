@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 5.8.0
+
+- Displaying the element colors, if defined.
+
+API: 5.55
+Based on novelibre 5.55.4
+
+
 ### Version 5.7.0
 
 - Refactored the code for better maintainability.

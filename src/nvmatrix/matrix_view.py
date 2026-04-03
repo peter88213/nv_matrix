@@ -9,6 +9,7 @@ from tkinter import ttk
 from nvlib.controller.sub_controller import SubController
 from nvlib.gui.observer import Observer
 from nvmatrix.node import Node
+from nvmatrix.nvmatrix_globals import prefs
 from nvmatrix.nvmatrix_locale import _
 from nvmatrix.platform.platform_settings import KEYS
 from nvmatrix.platform.platform_settings import MOUSE
@@ -20,16 +21,15 @@ import tkinter as tk
 
 class MatrixView(tk.Toplevel, Observer, SubController):
 
-    def __init__(self, model, controller, prefs):
+    def __init__(self, model, controller):
         tk.Toplevel.__init__(self)
 
         self._mdl = model
-        self.prefs = prefs
         self.isOpen = True
         if controller.isLocked:
             self.lock()
 
-        self.geometry(self.prefs['window_geometry'])
+        self.geometry(prefs['window_geometry'])
         self.lift()
         self.focus()
 
@@ -55,7 +55,6 @@ class MatrixView(tk.Toplevel, Observer, SubController):
             self._relationsTable = RelationsTable(
                 self.tableFrame,
                 self._mdl.novel,
-                self.prefs,
                 self._mdl.nvService.new_hovertip,
             )
             self._relationsTable.set_nodes()
@@ -67,7 +66,7 @@ class MatrixView(tk.Toplevel, Observer, SubController):
 
         # "Show plot lines" checkbox.
         self._showPlotlines = tk.BooleanVar(
-            value=self.prefs['show_plot_lines'],
+            value=prefs['show_plot_lines'],
         )
         ttk.Checkbutton(
             self,
@@ -80,7 +79,7 @@ class MatrixView(tk.Toplevel, Observer, SubController):
 
         # "Show characters" checkbox.
         self._showCharacters = tk.BooleanVar(
-            value=self.prefs['show_characters'],
+            value=prefs['show_characters'],
         )
         ttk.Checkbutton(
             self,
@@ -93,7 +92,7 @@ class MatrixView(tk.Toplevel, Observer, SubController):
 
         # "Show locations" checkbox.
         self._showLocations = tk.BooleanVar(
-            value=self.prefs['show_locations'],
+            value=prefs['show_locations'],
         )
         ttk.Checkbutton(
             self,
@@ -106,7 +105,7 @@ class MatrixView(tk.Toplevel, Observer, SubController):
 
         # "Show items" checkbox.
         self._showItems = tk.BooleanVar(
-            value=self.prefs['show_items'],
+            value=prefs['show_items'],
         )
         ttk.Checkbutton(
             self,
@@ -119,7 +118,7 @@ class MatrixView(tk.Toplevel, Observer, SubController):
 
         # "Major characters only" checkbox.
         self._majorCharactersOnly = tk.BooleanVar(
-            value=self.prefs['major_characters_only'],
+            value=prefs['major_characters_only'],
         )
         ttk.Checkbutton(
             self,
@@ -158,7 +157,7 @@ class MatrixView(tk.Toplevel, Observer, SubController):
 
     def on_quit(self, event=None):
         self.isOpen = False
-        self.prefs['window_geometry'] = self.winfo_geometry()
+        prefs['window_geometry'] = self.winfo_geometry()
         self.tableFrame.destroy()
         # this is necessary for deleting the event bindings
         self._mdl.delete_observer(self)
@@ -169,32 +168,32 @@ class MatrixView(tk.Toplevel, Observer, SubController):
         Node.isLocked = False
 
     def _change_major_characters_only(self):
-        self.prefs['major_characters_only'] = (
+        prefs['major_characters_only'] = (
             self._majorCharactersOnly.get()
         )
-        if self.prefs['show_characters']:
+        if prefs['show_characters']:
             self.refresh()
 
     def _change_show_characters(self):
-        self.prefs['show_characters'] = (
+        prefs['show_characters'] = (
             self._showCharacters.get()
         )
         self.refresh()
 
     def _change_show_items(self):
-        self.prefs['show_items'] = (
+        prefs['show_items'] = (
             self._showItems.get()
         )
         self.refresh()
 
     def _change_show_locations(self):
-        self.prefs['show_locations'] = (
+        prefs['show_locations'] = (
             self._showLocations.get()
         )
         self.refresh()
 
     def _change_show_plot_lines(self):
-        self.prefs['show_plot_lines'] = (
+        prefs['show_plot_lines'] = (
             self._showPlotlines.get()
         )
         self.refresh()

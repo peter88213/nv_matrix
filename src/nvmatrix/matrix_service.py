@@ -9,6 +9,7 @@ from pathlib import Path
 from nvlib.controller.sub_controller import SubController
 from nvlib.gui.set_icon_tk import set_icon
 from nvmatrix.matrix_view import MatrixView
+from nvmatrix.nvmatrix_globals import prefs
 
 
 class MatrixService(SubController):
@@ -20,14 +21,9 @@ class MatrixService(SubController):
         color_bg_01='gray85',
         color_bg_10='gray95',
         color_bg_11='white',
-        color_plotline_heading='deepSkyBlue',
-        color_plotline_node='deepSkyBlue3',
-        color_character_heading='goldenrod1',
-        color_character_node='goldenrod3',
-        color_location_heading='coral1',
-        color_location_node='coral3',
-        color_item_heading='aquamarine1',
-        color_item_node='aquamarine3',
+        color_hd_dark='gray70',
+        color_hd_bright='gray90',
+        color_node='gray30',
     )
     OPTIONS = dict(
         show_plot_lines=True,
@@ -55,9 +51,8 @@ class MatrixService(SubController):
             filePath=f'{configDir}/{self.INI_FILENAME}',
         )
         self.configuration.read()
-        self.prefs = {}
-        self.prefs.update(self.configuration.settings)
-        self.prefs.update(self.configuration.options)
+        prefs.update(self.configuration.settings)
+        prefs.update(self.configuration.options)
 
     def lock(self):
         """Inhibit changes on the model.
@@ -84,11 +79,11 @@ class MatrixService(SubController):
                 self._matrixViewer.on_quit()
 
         #--- Save configuration
-        for keyword in self.prefs:
+        for keyword in prefs:
             if keyword in self.configuration.options:
-                self.configuration.options[keyword] = self.prefs[keyword]
+                self.configuration.options[keyword] = prefs[keyword]
             elif keyword in self.configuration.settings:
-                self.configuration.settings[keyword] = self.prefs[keyword]
+                self.configuration.settings[keyword] = prefs[keyword]
         self.configuration.write()
 
     def unlock(self):
@@ -114,7 +109,6 @@ class MatrixService(SubController):
         self._matrixViewer = MatrixView(
             self._mdl,
             self._ctrl,
-            self.prefs,
         )
         self._matrixViewer.title(f'{self._mdl.novel.title} - {windowTitle}')
         set_icon(self._matrixViewer, icon='matrix', default=False)
