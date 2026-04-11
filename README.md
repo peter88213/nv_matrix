@@ -28,7 +28,7 @@ The plugin adds a **Matrix** entry to the *novelibre* **Tools** menu and a
 
 ### Default: Executable Python zip archive
 
-Download the latest release [nv_matrix_v5.8.0.pyz](https://github.com/peter88213/nv_matrix/raw/main/dist/nv_matrix_v5.8.0.pyz)
+Download the latest release [nv_matrix_v5.8.0.pyz](https://github.com/peter88213/nv_matrix/raw/main/dist/nv_matrix_v5.8.0.pyz) (28 KB)
 
 - Launch *nv_matrix_v5.8.0.pyz* by double-clicking (Windows desktop),
 - or execute `python nv_matrix_v5.8.0.pyz` (Windows), resp. `python3 nv_matrix_v5.8.0.pyz` (Linux) on the command line.
@@ -46,7 +46,7 @@ Download the latest release [nv_matrix_v5.8.0.pyz](https://github.com/peter88213
 
 ### Alternative: Zip file
 
-The package is also available in zip format: [nv_matrix_v5.8.0.zip](https://github.com/peter88213/nv_matrix/raw/main/dist/nv_matrix_v5.8.0.zip)
+The package is also available in zip format: [nv_matrix_v5.8.0.zip](https://github.com/peter88213/nv_matrix/raw/main/dist/nv_matrix_v5.8.0.zip) (28 KB)
 
 - Extract the *nv_matrix_v5.8.0* folder from the downloaded zipfile "nv_matrix_v5.8.0.zip".
 - Move into this new folder and launch *setup.py* by double-clicking (Windows/Linux desktop), 
