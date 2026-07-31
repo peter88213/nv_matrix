@@ -33,7 +33,7 @@ class Plugin(PluginBase):
     FEATURE = _('Matrix')
 
     def install(self, model, view, controller):
-        """Add a submenu to the 'Tools' menu.
+        """Install the plugin at runtime.
         
         Positional arguments:
             model -- Reference to the model instance.
@@ -48,7 +48,7 @@ class Plugin(PluginBase):
 
         #--- Configure the main menu.
 
-        # Create an entry to the Tools menu.
+        # Add an entry to the Tools menu.
         label = self.FEATURE
         self._ui.toolsMenu.add_command(
             label=label,
