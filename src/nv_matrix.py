@@ -15,8 +15,6 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 """
-import webbrowser
-
 from nvmatrix.nvmatrix_locale import _
 from nvlib.controller.plugin.plugin_base import PluginBase
 from nvmatrix.matrix_service import MatrixService
@@ -25,10 +23,9 @@ from nvmatrix.matrix_service import MatrixService
 class Plugin(PluginBase):
     """novelibre relationship matrix plugin class."""
     VERSION = '@release'
-    API_VERSION = '5.55'
+    API_VERSION = '5.63'
     DESCRIPTION = 'A section relationship table'
     URL = 'https://github.com/peter88213/nv_matrix'
-    HELP_URL = f'{_("https://peter88213.github.io/nvhelp-en")}/nv_matrix/'
 
     FEATURE = _('Matrix')
 
@@ -46,7 +43,13 @@ class Plugin(PluginBase):
         self.matrixService = MatrixService(model, view, controller)
         self._icon = self._get_icon('matrix.png')
 
-        #--- Configure the main menu.
+        #--- Configure the user interface.
+
+        def open_help():
+            self._ctrl.helpService.open_help_page('nv_matrix')
+
+        def start_viewer():
+            self.matrixService.start_viewer(self.FEATURE)
 
         # Add an entry to the Tools menu.
         label = self.FEATURE
@@ -54,28 +57,26 @@ class Plugin(PluginBase):
             label=label,
             image=self._icon,
             compound='left',
-            command=self.start_viewer,
+            command=start_viewer,
             state='disabled',
         )
         self._ui.toolsMenu.disableOnClose.append(label)
 
         # Add an entry to the Help menu.
-        label = _('Matrix plugin Online help')
+        label = _('Matrix plugin help')
         self._ui.helpMenu.add_command(
             label=label,
             image=self._icon,
             compound='left',
-            command=self.open_help,
+            command=open_help,
         )
 
-        #--- Configure the toolbar.
+        # Add a button to the toolbar.
         self._ui.toolbar.add_separator(),
-
-        # Put a button on the toolbar.
         self._ui.toolbar.new_button(
             text=_('Matrix'),
             image=self._icon,
-            command=self.start_viewer,
+            command=start_viewer,
             disableOnLock=False,
         ).pack(side='left')
 
@@ -87,12 +88,6 @@ class Plugin(PluginBase):
 
     def on_quit(self):
         self.matrixService.on_quit()
-
-    def open_help(self):
-        webbrowser.open(self.HELP_URL)
-
-    def start_viewer(self):
-        self.matrixService.start_viewer(self.FEATURE)
 
     def unlock(self):
         self.matrixService.unlock()

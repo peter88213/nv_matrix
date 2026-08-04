@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.8.0\n"
+"Project-Id-Version: 5.9.0\n"
 "POT-Creation-Date: 2025-09-18 23:19:46\n"
-"PO-Revision-Date: 2026-04-03 15:31:31\n"
+"PO-Revision-Date: 2026-08-04 17:51:52\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -61,8 +61,8 @@ msgstr "Nur Hauptfiguren"
 msgid "Matrix"
 msgstr "Matrix"
 
-msgid "Matrix plugin Online help"
-msgstr "Matrix-Plugin Online-Hilfe"
+msgid "Matrix plugin help"
+msgstr "Matrix-Plugin Hilfe"
 
 msgid "Minor Character"
 msgstr "Nebenfigur"
@@ -87,6 +87,3 @@ msgstr "Abschnitte"
 
 msgid "World building"
 msgstr "Weltenbau"
-
-msgid "https://peter88213.github.io/nvhelp-en"
-msgstr "https://peter88213.github.io/nvhelp-de"
