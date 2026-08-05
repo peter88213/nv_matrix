@@ -26,6 +26,7 @@ class Plugin(PluginBase):
     API_VERSION = '5.63'
     DESCRIPTION = 'A section relationship table'
     URL = 'https://github.com/peter88213/nv_matrix'
+    HELP_PAGE = 'nv_matrix'
 
     FEATURE = _('Matrix')
 
@@ -45,9 +46,6 @@ class Plugin(PluginBase):
 
         #--- Configure the user interface.
 
-        def open_help():
-            self._ctrl.helpService.open_help_page('nv_matrix')
-
         def start_viewer():
             self.matrixService.start_viewer(self.FEATURE)
 
@@ -62,14 +60,7 @@ class Plugin(PluginBase):
         )
         self._ui.toolsMenu.disableOnClose.append(label)
 
-        # Add an entry to the Help menu.
-        label = _('Matrix plugin help')
-        self._ui.helpMenu.add_command(
-            label=label,
-            image=self._icon,
-            compound='left',
-            command=open_help,
-        )
+        self._add_help_menu_entry(_('Matrix plugin help'))
 
         # Add a button to the toolbar.
         self._ui.toolbar.add_separator(),
