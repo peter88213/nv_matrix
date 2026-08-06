@@ -18,6 +18,7 @@ GNU General Public License for more details.
 from nvmatrix.nvmatrix_locale import _
 from nvlib.controller.plugin.plugin_base import PluginBase
 from nvmatrix.matrix_service import MatrixService
+from nvmatrix.nvmatrix_globals import HELP_PAGE
 
 
 class Plugin(PluginBase):
@@ -26,7 +27,7 @@ class Plugin(PluginBase):
     API_VERSION = '5.63'
     DESCRIPTION = 'A section relationship table'
     URL = 'https://github.com/peter88213/nv_matrix'
-    HELP_PAGE = 'nv_matrix'
+    HELP_PAGE = HELP_PAGE
 
     FEATURE = _('Matrix')
 

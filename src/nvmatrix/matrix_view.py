@@ -9,6 +9,7 @@ from tkinter import ttk
 from nvlib.controller.sub_controller import SubController
 from nvlib.gui.observer import Observer
 from nvmatrix.node import Node
+from nvmatrix.nvmatrix_globals import HELP_PAGE
 from nvmatrix.nvmatrix_globals import prefs
 from nvmatrix.nvmatrix_locale import _
 from nvmatrix.platform.platform_settings import KEYS
@@ -25,8 +26,10 @@ class MatrixView(tk.Toplevel, Observer, SubController):
         tk.Toplevel.__init__(self)
 
         self._mdl = model
+        self._ctrl = controller
+
         self.isOpen = True
-        if controller.isLocked:
+        if self._ctrl.isLocked:
             self.lock()
 
         self.geometry(prefs['window_geometry'])
@@ -40,10 +43,7 @@ class MatrixView(tk.Toplevel, Observer, SubController):
         if PLATFORM != 'win':
             self.bind(KEYS.QUIT_PROGRAM[0], self.on_quit)
         self.protocol("WM_DELETE_WINDOW", self.on_quit)
-
-        #--- Main menu.
-        self.mainMenu = tk.Menu(self)
-        self.config(menu=self.mainMenu)
+        self.bind(KEYS.OPEN_HELP[0], self._open_help)
 
         #--- Main window and table frame.
         self.mainWindow = ttk.Frame(self)
@@ -136,6 +136,13 @@ class MatrixView(tk.Toplevel, Observer, SubController):
             command=self.on_quit,
         ).pack(side='right', padx=5, pady=5)
 
+        # Help button.
+        ttk.Button(
+            self,
+            text=_('Help'),
+            command=self._open_help,
+        ).pack(side='right', padx=5, pady=5)
+
     def lock(self):
         """Inhibit element change."""
         Node.isLocked = True
@@ -204,3 +211,5 @@ class MatrixView(tk.Toplevel, Observer, SubController):
         self._relationsTable.get_nodes()
         self._skipUpdate = False
 
+    def _open_help(self, event=None):
+        self._ctrl.open_help(page=HELP_PAGE)
