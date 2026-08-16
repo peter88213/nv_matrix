@@ -55,10 +55,7 @@ class RelationsTable:
         def get_colors(elements, elemId, defaultBg):
             elemColor = elements[elemId].color
             if elemColor is not None:
-                if HexColor.is_dark(elemColor):
-                    fgColor = WHITE
-                else:
-                    fgColor = BLACK
+                fgColor = WHITE if HexColor.is_dark(elemColor) else BLACK
                 bgColor = nodeColor = elemColor
             else:
                 fgColor = BLACK
