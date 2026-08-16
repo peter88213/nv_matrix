@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 5.9.3
+
+- Refactored the code
+
+API: 5.63
+Based on novelibre 5.64.6
+
+
 ### Version 5.9.2
 
 - Added context sensitive help (**Help** Button and `F1` key).
