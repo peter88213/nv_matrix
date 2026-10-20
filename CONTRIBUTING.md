@@ -72,7 +72,7 @@ See the [novelibre CONTRIBUTING page](https://github.com/peter88213/novelibre/bl
 └── nv_matrix/
     ├── i18n/
     ├── src/
-	 │   └── nvmatrix/
+    │   └── nvmatrix/
     └── tools/ 
         └── build.py
 ```
